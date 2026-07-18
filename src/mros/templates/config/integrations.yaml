@@ -1,0 +1,33 @@
+academic_tools:
+  role: deterministic scholarly discovery and bounded document access
+  mode: external_mcp
+  default_access: read_only
+  audited_distribution: academic-tools-mcp
+  audited_version: 2026.6.4
+  upgrade_policy: pin and rerun live certification
+zotero:
+  role: canonical human library, annotations, page-level consultation, bibliography export
+  mode: external_mcp
+  default_access: read_only
+  audited_distribution: zotero-mcp-server
+  audited_version: 0.6.2
+  fulltext_tool_default: denied
+  writes_require_human_approval: true
+  upgrade_policy: pin and rerun live certification
+paperqa:
+  role: optional local parser and retrieval index for an accepted corpus
+  mode: optional_python_dependency
+  audited_repository_ref: d7675d7b7eddeb3535e8c260399c5bbeeb818c50
+  compatible_major: 5
+  agent_answering_default: false
+  llm_metadata_inference_default: false
+  media_enrichment_default: false
+  accepted_evidence_requires_mros_validation: true
+  upgrade_policy: run adapter contract tests and retrieval benchmark
+scholarqa:
+  role: architecture reference only
+  audited_version: 0.8.13
+  runtime_required: false
+recursive_research:
+  role: architecture reference only
+  runtime_required: false

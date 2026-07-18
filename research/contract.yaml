@@ -1,0 +1,65 @@
+project_id: mros-system
+title: Mozare Research Operating System
+research_purpose: >-
+  Deliver a repo-native, evidence-first research operating system for Claude Code that
+  converts a rich human methodology into bounded operations, typed state, deterministic
+  validation, controlled integrations, and replayable research decisions while conserving
+  Claude Pro usage.
+target_decisions:
+  - Select the final distribution of responsibility among Claude Code, deterministic scripts, Academic Tools MCP, Zotero MCP, PaperQA, Git, and human approval.
+  - Select model and effort routing that preserves research quality without globally expensive reasoning.
+  - Define evidence, claim, release, integration, and clean-session gates.
+audiences:
+  - Mohammad Zare as researcher, designer, product manager, and system owner
+  - Future collaborators and reviewers of the research workflow
+genres:
+  - executable research repository
+  - technical and methodological documentation
+  - reusable Claude Code harness
+scope:
+  - humanities, arts, design, AI-mediated, technical, comparative, and strategic research
+  - mixed scholarly, archival, web, repository, local, and user-provided corpora
+  - offline-verifiable core with explicitly bounded optional integrations
+exclusions:
+  - autonomous claims without source-grounded evidence
+  - destructive Zotero access in the normal research profile
+  - PaperQA answer-agent or per-passage LLM summarization in the default path
+  - a single long methodology prompt governing every task
+  - claims of live-integration certification without the user's environment
+uncertainty_policy: >-
+  Record unknown, not accessed, not verified, not live-tested, and upstream-contract-dependent
+  states explicitly. Do not replace missing information with plausible completion.
+languages:
+  - en
+  - fa
+source_policies:
+  - Preserve source identity, version, access route, and transformation history.
+  - Distinguish source material, prior scholarship, human interpretation, calculation, and generated output.
+  - Treat retrieval hits as candidates until exact text, location, and local context are checked.
+  - Search for credible challenges to central claims.
+output_obligations:
+  - runnable Python package and CLI
+  - Claude Code skills, bounded subagents, permissions, and hooks
+  - typed schemas and deterministic validation
+  - read-only Zotero and Academic Tools integration policy
+  - retrieval-only PaperQA adapter
+  - offline test report and live certification procedure
+  - release archive and checksum
+approval_gates:
+  - scope
+  - central_claim_promotion
+  - destructive_library_change
+  - final_release
+budget:
+  model: sonnet
+  effort: medium
+  max_query_batches: 2
+  max_tool_calls: 30
+  max_candidates: 20
+  max_full_sources: 5
+  max_evidence_spans: 12
+  max_subagents: 1
+  max_output_words: 1500
+  stop_rule: >-
+    Stop a bounded work unit when its required records validate, consequential gaps are
+    explicit, and further model work is not needed for the current decision.

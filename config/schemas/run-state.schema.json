@@ -1,0 +1,140 @@
+{
+  "$defs": {
+    "ResearchBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "effort": {
+          "default": "medium",
+          "title": "Effort",
+          "type": "string"
+        },
+        "max_candidates": {
+          "default": 20,
+          "maximum": 500,
+          "minimum": 1,
+          "title": "Max Candidates",
+          "type": "integer"
+        },
+        "max_evidence_spans": {
+          "default": 12,
+          "maximum": 200,
+          "minimum": 1,
+          "title": "Max Evidence Spans",
+          "type": "integer"
+        },
+        "max_full_sources": {
+          "default": 5,
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Max Full Sources",
+          "type": "integer"
+        },
+        "max_output_words": {
+          "default": 1500,
+          "maximum": 50000,
+          "minimum": 50,
+          "title": "Max Output Words",
+          "type": "integer"
+        },
+        "max_query_batches": {
+          "default": 2,
+          "maximum": 50,
+          "minimum": 1,
+          "title": "Max Query Batches",
+          "type": "integer"
+        },
+        "max_subagents": {
+          "default": 1,
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Max Subagents",
+          "type": "integer"
+        },
+        "max_tool_calls": {
+          "default": 30,
+          "maximum": 500,
+          "minimum": 1,
+          "title": "Max Tool Calls",
+          "type": "integer"
+        },
+        "model": {
+          "default": "sonnet",
+          "title": "Model",
+          "type": "string"
+        },
+        "stop_rule": {
+          "default": "Stop when critical claims are supported, contested, or explicitly unresolved and marginal evidence gain is low.",
+          "title": "Stop Rule",
+          "type": "string"
+        }
+      },
+      "title": "ResearchBudget",
+      "type": "object"
+    }
+  },
+  "$id": "https://mros.local/schemas/run-state.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "active_question_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Active Question Ids",
+      "type": "array"
+    },
+    "blockers": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Blockers",
+      "type": "array"
+    },
+    "budget": {
+      "$ref": "#/$defs/ResearchBudget"
+    },
+    "corpus_snapshot_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Corpus Snapshot Id"
+    },
+    "last_event_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Event Hash"
+    },
+    "next_actions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Next Actions",
+      "type": "array"
+    },
+    "phase": {
+      "default": "frame",
+      "title": "Phase",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    }
+  },
+  "title": "RunState",
+  "type": "object"
+}

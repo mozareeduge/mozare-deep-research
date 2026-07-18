@@ -1,0 +1,76 @@
+version: "1.0"
+source_note: "Operational adaptation of Mohammad Zare's research methodology; not a verbatim prompt."
+invariants:
+  - id: R01
+    operational_rule: "Begin each work unit from a stated question, target decision, scope, and exclusions."
+  - id: R02
+    operational_rule: "Keep source text, prior scholarship, user interpretation, calculations, and model-generated material distinct."
+  - id: R03
+    operational_rule: "Record source identity, version, access route, transformation history, and exact location where available."
+  - id: R04
+    operational_rule: "Treat each new connection as a candidate until supporting and challenging evidence have been reviewed."
+  - id: R05
+    operational_rule: "Do not fill missing facts with plausible language; record unknown, not accessed, or not verified."
+  - id: R06
+    operational_rule: "A formal claim must resolve to accepted evidence and its wording must not exceed that evidence."
+  - id: R07
+    operational_rule: "For central claims, seek credible alternatives, counterexamples, and simpler explanations."
+  - id: R08
+    operational_rule: "Use deterministic scripts for normalization, deduplication, exact matching, validation, and accounting."
+  - id: R09
+    operational_rule: "Write consequential state changes to disk before ending a phase."
+  - id: R10
+    operational_rule: "Preserve rejected and deferred routes with a reason and a reopening condition."
+  - id: R11
+    operational_rule: "Draft only from approved claims and assigned evidence."
+  - id: R12
+    operational_rule: "Require human approval for scope, central-claim promotion, destructive library changes, and final release."
+term_translation:
+  object-field: scope map
+  profile: source/access record
+  trace: lead
+  relation-object: candidate link
+  claim-object: claim record
+  evidence state: support type
+  use-status: allowed use
+  visible genesis: event log
+  residue: deferred/rejected ledger
+  expectedness: familiarity-bias check
+  metaphoring: analogy-to-mechanism test
+  making as inquiry: prototype-as-test loop
+  convergence: release selection
+  export: publication gate
+prohibited_default_terms:
+  - object-field
+  - ontographic
+  - object surplus
+  - proxy space
+  - relation pressure
+  - metaphoring
+  - mediational thickness
+  - visible genesis
+  - carpentry
+  - residue-object
+  - mapping object
+run_profiles:
+  scan:
+    purpose: "Map the source landscape without making formal claims."
+    outputs: ["candidate source map", "gaps", "acquisition list", "query ledger"]
+  evidence:
+    purpose: "Create verified passages, qualified evidence records, and scoped claims."
+    outputs: ["verified spans", "evidence cards", "challenge records", "claim graph"]
+  close-read:
+    purpose: "Reconstruct how a bounded source or source set works."
+    outputs: ["source analysis records", "limits", "next research actions"]
+  compare:
+    purpose: "Compare a balanced source set through declared dimensions without flattening differences."
+    outputs: ["comparison matrix", "counter-cases", "uncertainties", "decision rationale"]
+  prototype-test:
+    purpose: "Turn one research proposition into the smallest testable artifact."
+    outputs: ["design decision record", "prototype", "test evidence", "revision record"]
+  synthesis:
+    purpose: "Compile an approved genre from accepted claims and assigned evidence."
+    outputs: ["approved outline", "traceable draft", "omission record"]
+  critical:
+    purpose: "Challenge a consequential claim or release in a fresh context."
+    outputs: ["blocking findings", "non-blocking findings", "repair route"]

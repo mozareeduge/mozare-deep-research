@@ -1,0 +1,83 @@
+{
+  "$defs": {
+    "AuditIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "object_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Object Id"
+        },
+        "path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Path"
+        },
+        "severity": {
+          "title": "Severity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "severity",
+        "code",
+        "message"
+      ],
+      "title": "AuditIssue",
+      "type": "object"
+    }
+  },
+  "$id": "https://mros.local/schemas/audit-report.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checked_at": {
+      "format": "date-time",
+      "title": "Checked At",
+      "type": "string"
+    },
+    "issues": {
+      "items": {
+        "$ref": "#/$defs/AuditIssue"
+      },
+      "title": "Issues",
+      "type": "array"
+    },
+    "project_root": {
+      "title": "Project Root",
+      "type": "string"
+    },
+    "release_mode": {
+      "default": false,
+      "title": "Release Mode",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "project_root"
+  ],
+  "title": "AuditReport",
+  "type": "object"
+}

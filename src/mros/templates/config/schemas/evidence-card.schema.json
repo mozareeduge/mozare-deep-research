@@ -1,0 +1,153 @@
+{
+  "$defs": {
+    "AllowedUse": {
+      "enum": [
+        "discovery",
+        "internal_synthesis",
+        "formal_claim",
+        "design",
+        "creative",
+        "appendix",
+        "residue",
+        "quarantine"
+      ],
+      "title": "AllowedUse",
+      "type": "string"
+    },
+    "Directness": {
+      "enum": [
+        "direct",
+        "indirect",
+        "secondary_reference",
+        "generated_candidate"
+      ],
+      "title": "Directness",
+      "type": "string"
+    },
+    "EvidenceRole": {
+      "enum": [
+        "support",
+        "refute",
+        "qualify",
+        "define",
+        "contextualize",
+        "method",
+        "example"
+      ],
+      "title": "EvidenceRole",
+      "type": "string"
+    },
+    "ReviewStatus": {
+      "enum": [
+        "pending",
+        "accepted",
+        "rejected",
+        "needs_review"
+      ],
+      "title": "ReviewStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://mros.local/schemas/evidence-card.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "allowed_uses": {
+      "items": {
+        "$ref": "#/$defs/AllowedUse"
+      },
+      "title": "Allowed Uses",
+      "type": "array"
+    },
+    "directness": {
+      "$ref": "#/$defs/Directness"
+    },
+    "evidence_id": {
+      "pattern": "^[a-z][a-z0-9_.:-]{1,127}$",
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "independence_group": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Independence Group"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "method_context": {
+      "default": "",
+      "title": "Method Context",
+      "type": "string"
+    },
+    "notes": {
+      "default": "",
+      "title": "Notes",
+      "type": "string"
+    },
+    "proposition": {
+      "minLength": 1,
+      "title": "Proposition",
+      "type": "string"
+    },
+    "question_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Question Ids",
+      "type": "array"
+    },
+    "review_status": {
+      "$ref": "#/$defs/ReviewStatus",
+      "default": "pending"
+    },
+    "reviewer": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reviewer"
+    },
+    "role": {
+      "$ref": "#/$defs/EvidenceRole"
+    },
+    "scope": {
+      "default": "",
+      "title": "Scope",
+      "type": "string"
+    },
+    "span_ids": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Span Ids",
+      "type": "array"
+    }
+  },
+  "required": [
+    "evidence_id",
+    "span_ids",
+    "proposition",
+    "role",
+    "directness"
+  ],
+  "title": "EvidenceCard",
+  "type": "object"
+}

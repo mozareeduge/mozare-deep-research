@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -e '.[dev]'
+      - run: python scripts/export_schemas.py --check
+      - run: python scripts/sync_templates.py --check
+      - run: python -m pytest --cov=mros --cov-report=term-missing
+      - run: python -m compileall -q src tests scripts
+      - run: python -m mros verify .
+      - run: python -m mros audit . --release
+      - name: Build and install wheel
+        run: |
+          python -m pip wheel . --no-deps -w dist
+          python -m venv /tmp/mros-wheel-venv
+          /tmp/mros-wheel-venv/bin/python -m pip install dist/*.whl
+          /tmp/mros-wheel-venv/bin/mros init /tmp/mros-wheel-project --project-id wheel-project --title "Wheel Project" --with-claude
+          /tmp/mros-wheel-venv/bin/mros doctor /tmp/mros-wheel-project
+          /tmp/mros-wheel-venv/bin/mros validate /tmp/mros-wheel-project

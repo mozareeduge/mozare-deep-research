@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mozare-research-os"
+version = "1.0.0"
+description = "A repo-native, evidence-first research operating system for Claude Code"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Mohammad Zare"}]
+dependencies = [
+  "pydantic>=2.7,<3",
+  "PyYAML>=6,<7",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-cov>=5"]
+paperqa = ["paper-qa>=5,<6"]
+
+[project.scripts]
+mros = "mros.cli:main"
+mros-session-context = "mros.hooks:session_context_main"
+mros-stop-gate = "mros.hooks:stop_gate_main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.coverage.run]
+source = ["mros"]
+branch = true
+[tool.setuptools.package-data]
+mros = [
+  "templates/CLAUDE.md",
+  "templates/.mcp.json.example",
+  "templates/.env.example",
+  "templates/.claude/**/*",
+  "templates/config/**/*",
+]

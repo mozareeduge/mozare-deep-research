@@ -1,0 +1,18 @@
+default:
+  model: sonnet
+  effort: medium
+phases:
+  frame: {model: sonnet, effort: medium}
+  intake: {model: sonnet, effort: low}
+  query-planning: {model: sonnet, effort: low}
+  source-screening: {model: haiku, effort: low, escalate_to: "sonnet/low"}
+  evidence-extraction: {model: sonnet, effort: low}
+  evidence-qualification: {model: sonnet, effort: medium}
+  counter-reading: {model: sonnet, effort: medium}
+  claim-construction: {model: sonnet, effort: medium}
+  outline: {model: sonnet, effort: medium}
+  drafting: {model: sonnet, effort: medium}
+  citation-audit: {model: sonnet, effort: medium}
+  central-adversarial-review: {model: sonnet, effort: high}
+  exceptional-architecture-decision: {model: opus, effort: high, human_approval: true}
+forbidden_defaults: [max, ultracode, fable]

@@ -1,0 +1,174 @@
+{
+  "$defs": {
+    "ResearchBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "effort": {
+          "default": "medium",
+          "title": "Effort",
+          "type": "string"
+        },
+        "max_candidates": {
+          "default": 20,
+          "maximum": 500,
+          "minimum": 1,
+          "title": "Max Candidates",
+          "type": "integer"
+        },
+        "max_evidence_spans": {
+          "default": 12,
+          "maximum": 200,
+          "minimum": 1,
+          "title": "Max Evidence Spans",
+          "type": "integer"
+        },
+        "max_full_sources": {
+          "default": 5,
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Max Full Sources",
+          "type": "integer"
+        },
+        "max_output_words": {
+          "default": 1500,
+          "maximum": 50000,
+          "minimum": 50,
+          "title": "Max Output Words",
+          "type": "integer"
+        },
+        "max_query_batches": {
+          "default": 2,
+          "maximum": 50,
+          "minimum": 1,
+          "title": "Max Query Batches",
+          "type": "integer"
+        },
+        "max_subagents": {
+          "default": 1,
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Max Subagents",
+          "type": "integer"
+        },
+        "max_tool_calls": {
+          "default": 30,
+          "maximum": 500,
+          "minimum": 1,
+          "title": "Max Tool Calls",
+          "type": "integer"
+        },
+        "model": {
+          "default": "sonnet",
+          "title": "Model",
+          "type": "string"
+        },
+        "stop_rule": {
+          "default": "Stop when critical claims are supported, contested, or explicitly unresolved and marginal evidence gain is low.",
+          "title": "Stop Rule",
+          "type": "string"
+        }
+      },
+      "title": "ResearchBudget",
+      "type": "object"
+    }
+  },
+  "$id": "https://mros.local/schemas/research-contract.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "approval_gates": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Approval Gates",
+      "type": "array"
+    },
+    "audiences": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Audiences",
+      "type": "array"
+    },
+    "budget": {
+      "$ref": "#/$defs/ResearchBudget"
+    },
+    "exclusions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Exclusions",
+      "type": "array"
+    },
+    "genres": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Genres",
+      "type": "array"
+    },
+    "languages": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Languages",
+      "type": "array"
+    },
+    "output_obligations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Output Obligations",
+      "type": "array"
+    },
+    "project_id": {
+      "pattern": "^[a-z][a-z0-9_.:-]{1,127}$",
+      "title": "Project Id",
+      "type": "string"
+    },
+    "research_purpose": {
+      "minLength": 1,
+      "title": "Research Purpose",
+      "type": "string"
+    },
+    "scope": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope",
+      "type": "array"
+    },
+    "source_policies": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Policies",
+      "type": "array"
+    },
+    "target_decisions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Target Decisions",
+      "type": "array"
+    },
+    "title": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "uncertainty_policy": {
+      "default": "Record unknown, not accessed, and not verified states explicitly.",
+      "title": "Uncertainty Policy",
+      "type": "string"
+    }
+  },
+  "required": [
+    "project_id",
+    "title",
+    "research_purpose"
+  ],
+  "title": "ResearchContract",
+  "type": "object"
+}

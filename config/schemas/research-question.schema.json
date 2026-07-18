@@ -1,0 +1,190 @@
+{
+  "$defs": {
+    "EvidenceRequirement": {
+      "additionalProperties": false,
+      "properties": {
+        "acceptable_source_kinds": {
+          "items": {
+            "$ref": "#/$defs/SourceKind"
+          },
+          "title": "Acceptable Source Kinds",
+          "type": "array"
+        },
+        "counter_search_required": {
+          "default": true,
+          "title": "Counter Search Required",
+          "type": "boolean"
+        },
+        "min_direct_evidence": {
+          "default": 1,
+          "maximum": 20,
+          "minimum": 0,
+          "title": "Min Direct Evidence",
+          "type": "integer"
+        },
+        "min_independent_groups": {
+          "default": 1,
+          "maximum": 20,
+          "minimum": 0,
+          "title": "Min Independent Groups",
+          "type": "integer"
+        },
+        "notes": {
+          "default": "",
+          "title": "Notes",
+          "type": "string"
+        }
+      },
+      "title": "EvidenceRequirement",
+      "type": "object"
+    },
+    "QuestionStatus": {
+      "enum": [
+        "open",
+        "searching",
+        "evidence_ready",
+        "contested",
+        "unresolved",
+        "closed"
+      ],
+      "title": "QuestionStatus",
+      "type": "string"
+    },
+    "QuestionType": {
+      "enum": [
+        "factual",
+        "bibliographic",
+        "conceptual",
+        "genealogical",
+        "mechanism",
+        "comparative",
+        "methodological",
+        "design_implication",
+        "technical_feasibility",
+        "evaluation",
+        "counterargument",
+        "open_unknown"
+      ],
+      "title": "QuestionType",
+      "type": "string"
+    },
+    "SourceKind": {
+      "enum": [
+        "article",
+        "book",
+        "chapter",
+        "archive_record",
+        "dataset",
+        "webpage",
+        "repository",
+        "software_documentation",
+        "user_note",
+        "generated",
+        "other"
+      ],
+      "title": "SourceKind",
+      "type": "string"
+    }
+  },
+  "$id": "https://mros.local/schemas/research-question.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "critical": {
+      "default": false,
+      "title": "Critical",
+      "type": "boolean"
+    },
+    "decision_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Decision Ids",
+      "type": "array"
+    },
+    "dependencies": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Dependencies",
+      "type": "array"
+    },
+    "evidence_requirement": {
+      "$ref": "#/$defs/EvidenceRequirement"
+    },
+    "excluded_source_types": {
+      "items": {
+        "$ref": "#/$defs/SourceKind"
+      },
+      "title": "Excluded Source Types",
+      "type": "array"
+    },
+    "languages": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Languages",
+      "type": "array"
+    },
+    "notes": {
+      "default": "",
+      "title": "Notes",
+      "type": "string"
+    },
+    "preferred_source_types": {
+      "items": {
+        "$ref": "#/$defs/SourceKind"
+      },
+      "title": "Preferred Source Types",
+      "type": "array"
+    },
+    "purpose_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Purpose Ids",
+      "type": "array"
+    },
+    "question_id": {
+      "pattern": "^[a-z][a-z0-9_.:-]{1,127}$",
+      "title": "Question Id",
+      "type": "string"
+    },
+    "question_type": {
+      "$ref": "#/$defs/QuestionType"
+    },
+    "status": {
+      "$ref": "#/$defs/QuestionStatus",
+      "default": "open"
+    },
+    "stop_rule": {
+      "default": "",
+      "title": "Stop Rule",
+      "type": "string"
+    },
+    "text": {
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+    },
+    "time_range": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Time Range"
+    }
+  },
+  "required": [
+    "question_id",
+    "text",
+    "question_type"
+  ],
+  "title": "ResearchQuestion",
+  "type": "object"
+}
