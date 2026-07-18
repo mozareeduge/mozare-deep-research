@@ -1,0 +1,91 @@
+{
+  "$id": "https://mros.local/schemas/handoff-receipt.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "claims_changed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Claims Changed",
+      "type": "array"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "decisions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Decisions",
+      "type": "array"
+    },
+    "do_not_repeat": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Do Not Repeat",
+      "type": "array"
+    },
+    "evidence_added": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Added",
+      "type": "array"
+    },
+    "failed_routes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Failed Routes",
+      "type": "array"
+    },
+    "next_actions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Next Actions",
+      "type": "array"
+    },
+    "objective_completed": {
+      "title": "Objective Completed",
+      "type": "string"
+    },
+    "sources_added": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Sources Added",
+      "type": "array"
+    },
+    "state_files_changed": {
+      "items": {
+        "type": "string"
+      },
+      "title": "State Files Changed",
+      "type": "array"
+    },
+    "unresolved": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Unresolved",
+      "type": "array"
+    },
+    "verification": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Verification",
+      "type": "array"
+    }
+  },
+  "required": [
+    "objective_completed"
+  ],
+  "title": "HandoffReceipt",
+  "type": "object"
+}

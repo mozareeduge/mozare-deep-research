@@ -1,0 +1,22 @@
+phase: release
+active_question_ids: []
+corpus_snapshot_id: null
+last_event_hash: 93a454156e6e7170fdfad240cfdf3e79a198ee60d9a10f9a8f1c2b06cde8e5c1
+blockers: []
+next_actions:
+- Install the repository in the user's environment.
+- Run the live integration certification with pinned upstream versions.
+- Calibrate phase-level model routing on a project-specific gold set.
+budget:
+  model: sonnet
+  effort: medium
+  max_query_batches: 2
+  max_tool_calls: 30
+  max_candidates: 20
+  max_full_sources: 5
+  max_evidence_spans: 12
+  max_subagents: 1
+  max_output_words: 1500
+  stop_rule: Preserve offline validity; reopen implementation only for a failed test,
+    a documented upstream contract change, or a project-specific requirement.
+updated_at: '2026-07-17T20:40:00Z'

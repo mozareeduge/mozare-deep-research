@@ -1,0 +1,53 @@
+{
+  "model": "sonnet",
+  "effortLevel": "medium",
+  "permissions": {
+    "allow": [
+      "Bash(python -m mros *)",
+      "Bash(python -m pytest *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "mcp__academic_tools__*",
+      "mcp__zotero__zotero_search_items",
+      "mcp__zotero__zotero_semantic_search",
+      "mcp__zotero__zotero_get_item_metadata",
+      "mcp__zotero__zotero_get_item_children",
+      "mcp__zotero__zotero_get_annotations",
+      "mcp__zotero__zotero_read_pdf_pages",
+      "mcp__zotero__zotero_get_collection_items",
+      "mcp__zotero__zotero_find_related_papers",
+      "mcp__zotero__zotero_export_bibliography",
+      "mcp__zotero__zotero_library_coverage"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Bash(rm -rf *)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mros-session-context",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "mros-stop-gate",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  }
+}

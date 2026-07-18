@@ -1,0 +1,35 @@
+objective_completed: Finalized the offline-verifiable MROS repository architecture and implementation.
+state_files_changed:
+  - research/contract.yaml
+  - research/state.yaml
+  - research/handoff.yaml
+  - docs/
+  - config/schemas/
+  - src/mros/
+  - tests/
+  - .claude/
+sources_added: []
+evidence_added: []
+claims_changed: []
+decisions:
+  - Methodology is compiled into operations rather than injected as a master prompt.
+  - Zotero is read-only by default and remains the canonical human library.
+  - PaperQA is retrieval-only by default.
+  - Sonnet medium is the session baseline with phase-level effort overrides.
+  - The automatic stop hook validates repository state; phase handoff remains explicit.
+unresolved:
+  - Live integration certification requires the user's local environment and credentials.
+failed_routes: []
+next_actions:
+  - Run docs/live-certification.md after installation.
+  - Build a project-specific model-routing gold set.
+do_not_repeat:
+  - Do not enable Zotero writes in the normal research profile.
+  - Do not use PaperQA answer generation as accepted research evidence.
+  - Do not paste the complete methodology dossier into routine Claude sessions.
+verification:
+  - 83 offline tests passed.
+  - Total statement coverage was 76%.
+  - Full, phase-stop, release, wheel-install, hook, and extracted-archive verification passed.
+  - Exact evidence is recorded in TEST_REPORT.md.
+created_at: 2026-07-17T22:00:00Z

@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "zotero": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "zotero-mcp-server==0.6.2",
+        "zotero-mcp"
+      ],
+      "env": {
+        "ZOTERO_LOCAL": "${ZOTERO_LOCAL:-true}"
+      }
+    },
+    "academic_tools": {
+      "command": "uvx",
+      "args": [
+        "academic-tools-mcp==2026.6.4"
+      ]
+    }
+  }
+}

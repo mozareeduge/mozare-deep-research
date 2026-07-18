@@ -1,0 +1,112 @@
+{
+  "$id": "https://mros.local/schemas/query-record.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "batch_number": {
+      "default": 1,
+      "minimum": 1,
+      "title": "Batch Number",
+      "type": "integer"
+    },
+    "candidate_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Candidate Ids",
+      "type": "array"
+    },
+    "cost_class": {
+      "default": "deterministic",
+      "title": "Cost Class",
+      "type": "string"
+    },
+    "exact_query": {
+      "title": "Exact Query",
+      "type": "string"
+    },
+    "executed_at": {
+      "format": "date-time",
+      "title": "Executed At",
+      "type": "string"
+    },
+    "filters": {
+      "additionalProperties": true,
+      "title": "Filters",
+      "type": "object"
+    },
+    "language": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Language"
+    },
+    "provider": {
+      "title": "Provider",
+      "type": "string"
+    },
+    "query_id": {
+      "pattern": "^[a-z][a-z0-9_.:-]{1,127}$",
+      "title": "Query Id",
+      "type": "string"
+    },
+    "query_type": {
+      "default": "discovery",
+      "title": "Query Type",
+      "type": "string"
+    },
+    "question_id": {
+      "pattern": "^[a-z][a-z0-9_.:-]{1,127}$",
+      "title": "Question Id",
+      "type": "string"
+    },
+    "rejected_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Rejected Ids",
+      "type": "array"
+    },
+    "result_count": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Result Count"
+    },
+    "selected_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Selected Ids",
+      "type": "array"
+    },
+    "selection_reasons": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Selection Reasons",
+      "type": "object"
+    }
+  },
+  "required": [
+    "query_id",
+    "question_id",
+    "provider",
+    "exact_query"
+  ],
+  "title": "QueryRecord",
+  "type": "object"
+}

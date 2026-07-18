@@ -1,0 +1,108 @@
+{
+  "$defs": {
+    "DecisionStatus": {
+      "enum": [
+        "proposed",
+        "accepted",
+        "rejected",
+        "superseded"
+      ],
+      "title": "DecisionStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://mros.local/schemas/design-decision.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "alternatives": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Alternatives",
+      "type": "array"
+    },
+    "claim_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Claim Ids",
+      "type": "array"
+    },
+    "concept": {
+      "title": "Concept",
+      "type": "string"
+    },
+    "decision_id": {
+      "pattern": "^[a-z][a-z0-9_.:-]{1,127}$",
+      "title": "Decision Id",
+      "type": "string"
+    },
+    "design_consequence": {
+      "title": "Design Consequence",
+      "type": "string"
+    },
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "operation": {
+      "title": "Operation",
+      "type": "string"
+    },
+    "reversibility": {
+      "title": "Reversibility",
+      "type": "string"
+    },
+    "risks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Risks",
+      "type": "array"
+    },
+    "selected_option": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Selected Option"
+    },
+    "status": {
+      "$ref": "#/$defs/DecisionStatus",
+      "default": "proposed"
+    },
+    "technical_consequence": {
+      "title": "Technical Consequence",
+      "type": "string"
+    },
+    "test_or_evaluation": {
+      "title": "Test Or Evaluation",
+      "type": "string"
+    },
+    "user_need": {
+      "title": "User Need",
+      "type": "string"
+    }
+  },
+  "required": [
+    "decision_id",
+    "concept",
+    "operation",
+    "user_need",
+    "design_consequence",
+    "technical_consequence",
+    "test_or_evaluation",
+    "reversibility"
+  ],
+  "title": "DesignDecision",
+  "type": "object"
+}
