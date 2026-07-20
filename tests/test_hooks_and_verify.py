@@ -28,7 +28,7 @@ def test_session_context_reports_compact_state(project: Path, monkeypatch, capsy
     session_context_main()
     text = capsys.readouterr().out
     assert "MROS session context" in text
-    assert "phase: frame" in text
+    assert "active run: none" in text
     assert "next actions" in text
 
 

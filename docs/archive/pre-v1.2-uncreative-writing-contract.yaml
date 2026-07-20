@@ -1,0 +1,81 @@
+project_id: uncreative-writing-dossier
+title: "Uncreative Writing: A Historical and Conceptual Literature-Review Dossier"
+research_purpose: >-
+  Produce a historically grounded, analytically rigorous literature-review dossier on the
+  concept "Uncreative Writing" -- its formation, principal authors and texts, adjacent and
+  precursor traditions, disputes, criticisms, and later developments -- suitable as a
+  foundation for later theoretical, methodological, and creative-research work.
+target_decisions:
+  - "dossier-thesis: Select the central thesis and argumentative throughline for the dossier on \"Uncreative Writing\", suitable for later theoretical, methodological, and creative-research work."
+  - "dossier-structure: Select which principal authors, texts, and disputes are load-bearing versus peripheral, and how the dossier's sections are organized."
+  - "source-scope: Select which precursor traditions and adjacent-but-differently-named practices fall inside versus outside this dossier's concept boundary for \"Uncreative Writing.\""
+  - "evidence-standard: Select the citation and evidence standard a claim must meet before promotion to central status in this dossier."
+audiences:
+  - Mohammad Zare as researcher assembling a literature-review dossier for later theoretical, methodological, and creative-research work
+  - Future collaborators and reviewers of this dossier
+genres:
+  - literature-review dossier
+  - historical and conceptual genealogy
+  - academic prose with citations
+scope:
+  - historical formation of the term and concept "Uncreative Writing"
+  - principal authors, texts, formulations, and disputes
+  - conceptual writing, appropriation, copying, constraint, authorship, mediation, digital
+    culture, archives, pedagogy, and artistic research
+  - significant precursors and adjacent traditions
+  - criticisms, limitations, alternative frameworks, and later developments
+  - distinction between the named concept "Uncreative Writing" and similar practices that
+    use other terms
+exclusions:
+  - Zotero library read or write operations of any kind in this research run
+  - PaperQA generated answers as accepted evidence
+  - fictional or creative extensions beyond the literature-review dossier itself
+  - contemporary "AI-generated text" debates, except where a source explicitly connects them
+    to Uncreative Writing
+  - claims not traceable to a specific text, edition, and location
+uncertainty_policy: >-
+  Record unknown, not accessed, not verified, and not yet searched states explicitly for every
+  claim, author attribution, date, and disputed fact. Do not replace missing information with
+  plausible-sounding completion. Flag disputed dates, attributions, or characterizations as
+  contested rather than resolving them silently.
+languages:
+  - en
+  - fa
+source_policies:
+  - Preserve source identity, edition/version, access route, and transformation history for
+    every source used in the dossier.
+  - Distinguish primary texts, prior scholarship, user interpretation, and generated dossier
+    prose as separate categories at all times.
+  - Treat retrieval hits as candidates until exact text, location, and local context are
+    checked against the source.
+  - Search beyond Zotero through scholarly databases, citation networks, books, chapters,
+    journals, primary texts, university and institutional sources, archives, trustworthy
+    repositories, and relevant web sources.
+  - Actively search for credible challenges, counterexamples, and simpler explanations for
+    every central claim.
+output_obligations:
+  - historically grounded literature-review dossier document on "Uncreative Writing"
+  - annotated source register with identity, access route, and location for each source
+  - claim records with explicit evidence status (accepted, contested, unresolved)
+  - explicit analysis distinguishing "Uncreative Writing" from adjacent, differently-named
+    practices
+  - a log of open questions requiring human approval before promotion or release
+approval_gates:
+  - scope
+  - central_claim_promotion
+  - destructive_library_change
+  - final_release
+budget:
+  model: sonnet
+  effort: medium
+  max_query_batches: 3
+  max_tool_calls: 40
+  max_candidates: 30
+  max_full_sources: 10
+  max_evidence_spans: 20
+  max_subagents: 1
+  max_output_words: 4000
+  stop_rule: >-
+    Stop a bounded work unit when its required records validate, consequential gaps and
+    disputes are explicit rather than resolved by assumption, and further model work would not
+    change the current decision.

@@ -1,0 +1,231 @@
+{
+  "$defs": {
+    "OutputProfile": {
+      "enum": [
+        "source-answer",
+        "research-note",
+        "concept-dossier",
+        "literature-review",
+        "comparative-report",
+        "design-brief"
+      ],
+      "title": "OutputProfile",
+      "type": "string"
+    },
+    "ResearchBudget": {
+      "additionalProperties": false,
+      "properties": {
+        "checkpoint_after_items": {
+          "default": 5,
+          "maximum": 25,
+          "minimum": 1,
+          "title": "Checkpoint After Items",
+          "type": "integer"
+        },
+        "max_candidates": {
+          "default": 40,
+          "maximum": 200,
+          "minimum": 1,
+          "title": "Max Candidates",
+          "type": "integer"
+        },
+        "max_core_close_reads": {
+          "default": 8,
+          "maximum": 30,
+          "minimum": 1,
+          "title": "Max Core Close Reads",
+          "type": "integer"
+        },
+        "max_evidence_items": {
+          "default": 40,
+          "maximum": 200,
+          "minimum": 1,
+          "title": "Max Evidence Items",
+          "type": "integer"
+        },
+        "max_query_batches": {
+          "default": 4,
+          "maximum": 12,
+          "minimum": 1,
+          "title": "Max Query Batches",
+          "type": "integer"
+        },
+        "max_selected_sources": {
+          "default": 18,
+          "maximum": 60,
+          "minimum": 1,
+          "title": "Max Selected Sources",
+          "type": "integer"
+        },
+        "max_subagents": {
+          "default": 2,
+          "maximum": 4,
+          "minimum": 0,
+          "title": "Max Subagents",
+          "type": "integer"
+        },
+        "max_terms": {
+          "default": 50,
+          "maximum": 250,
+          "minimum": 1,
+          "title": "Max Terms",
+          "type": "integer"
+        },
+        "stop_rule": {
+          "default": "Stop when central coverage slots are supported, contested, or explicitly unresolved and two bounded searches add little consequential evidence.",
+          "title": "Stop Rule",
+          "type": "string"
+        }
+      },
+      "title": "ResearchBudget",
+      "type": "object"
+    },
+    "ResearchMode": {
+      "enum": [
+        "lookup",
+        "close-read",
+        "brief",
+        "deep",
+        "design"
+      ],
+      "title": "ResearchMode",
+      "type": "string"
+    },
+    "RunStage": {
+      "enum": [
+        "routing",
+        "planning",
+        "discovery",
+        "selection",
+        "reading",
+        "evidence",
+        "challenge",
+        "synthesis",
+        "verification",
+        "complete"
+      ],
+      "title": "RunStage",
+      "type": "string"
+    },
+    "RunStatus": {
+      "enum": [
+        "active",
+        "needs_input",
+        "blocked",
+        "complete"
+      ],
+      "title": "RunStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://mros.local/schemas/research-run-state.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "budget": {
+      "$ref": "#/$defs/ResearchBudget"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "current_stage": {
+      "$ref": "#/$defs/RunStage",
+      "default": "planning"
+    },
+    "excluded_lanes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Excluded Lanes",
+      "type": "array"
+    },
+    "mode": {
+      "$ref": "#/$defs/ResearchMode"
+    },
+    "next_actions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Next Actions",
+      "type": "array"
+    },
+    "open_questions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Open Questions",
+      "type": "array"
+    },
+    "output_profile": {
+      "$ref": "#/$defs/OutputProfile",
+      "default": "research-note"
+    },
+    "progress": {
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "title": "Progress",
+      "type": "object"
+    },
+    "requirements": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Requirements",
+      "type": "array"
+    },
+    "route_reason": {
+      "default": "",
+      "title": "Route Reason",
+      "type": "string"
+    },
+    "run_id": {
+      "pattern": "^[a-z][a-z0-9_.:-]{1,127}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "scope_notes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Scope Notes",
+      "type": "array"
+    },
+    "source_lanes": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Source Lanes",
+      "type": "array"
+    },
+    "status": {
+      "$ref": "#/$defs/RunStatus",
+      "default": "active"
+    },
+    "title": {
+      "maxLength": 300,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date-time",
+      "title": "Updated At",
+      "type": "string"
+    },
+    "user_visible_status": {
+      "default": "",
+      "title": "User Visible Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "title",
+    "mode"
+  ],
+  "title": "ResearchRunState",
+  "type": "object"
+}

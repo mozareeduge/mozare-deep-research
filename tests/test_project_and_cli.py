@@ -90,3 +90,42 @@ def test_doctor_reports_optional_paperqa_without_failing(project: Path):
     payload = json.loads(result.stdout)
     assert payload["project_marker"] is True
     assert "paperqa_optional" in payload
+
+
+def test_run_cli_lifecycle(tmp_path: Path):
+    run = tmp_path / "semantic-run"
+    run.mkdir()
+    (run / "request.md").write_text("Research a concept deeply.", encoding="utf-8")
+    init = run_cli("run-init", str(run), "--mode", "deep", "--source-lane", "web")
+    assert init.returncode == 0, init.stderr
+    status = run_cli("run-state", str(run), "--stage", "discovery", "--next", "Search first bounded batch")
+    assert status.returncode == 0, status.stderr
+    validate = run_cli("run-validate", str(run))
+    assert validate.returncode == 0, validate.stderr
+    payload = json.loads(validate.stdout)
+    assert payload["mode"] == "deep"
+    assert payload["status"] == "active"
+
+
+def test_cli_run_append_accepts_inline_json(tmp_path: Path):
+    project = tmp_path / "inline-run"
+    project.mkdir()
+    (project / "request.md").write_text("A bounded question.", encoding="utf-8")
+    initialized = run_cli("run-init", str(project), "--mode", "brief")
+    assert initialized.returncode == 0, initialized.stderr
+    payload = '{"source_id":"source.inline","title":"Inline source","source_type":"article","lane":"web"}'
+    appended = run_cli("run-append", str(project), "--kind", "source", "--json", payload)
+    assert appended.returncode == 0, appended.stderr
+    assert "source.inline" in appended.stdout
+
+
+def test_event_cli_updates_state_hash(project: Path):
+    result = run_cli(
+        "event-append", str(project), "--event-id", "event.state-sync",
+        "--actor", "test", "--action", "sync-state"
+    )
+    assert result.returncode == 0, result.stderr
+    event = json.loads(result.stdout)
+    import yaml
+    state = yaml.safe_load((project / "research/state.yaml").read_text(encoding="utf-8"))
+    assert state["last_event_hash"] == event["event_hash"]

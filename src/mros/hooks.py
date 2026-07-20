@@ -12,23 +12,38 @@ from .verify import verify_project
 
 def session_context_main() -> None:
     root = Path.cwd()
-    state_path = root / "research/state.yaml"
-    handoff_path = root / "research/handoff.yaml"
     parts = ["MROS session context:"]
-    if state_path.exists():
-        state = yaml.safe_load(state_path.read_text(encoding="utf-8")) or {}
-        parts.append(f"- phase: {state.get('phase', 'unknown')}")
+
+    runs_root = root / "research" / "runs"
+    active_runs: list[tuple[float, dict[str, object]]] = []
+    if runs_root.exists():
+        for candidate in runs_root.glob("*/state.yaml"):
+            try:
+                data = yaml.safe_load(candidate.read_text(encoding="utf-8")) or {}
+                if data.get("status") in {"active", "needs_input", "blocked"}:
+                    active_runs.append((candidate.stat().st_mtime, data))
+            except Exception:
+                continue
+
+    if active_runs:
+        _, active = max(active_runs, key=lambda item: item[0])
         parts.append(
-            f"- active questions: {', '.join(state.get('active_question_ids', [])) or 'none'}"
+            f"- active run: {active.get('run_id', 'unknown')} "
+            f"[{active.get('output_profile', 'research-note')}] "
+            f"({active.get('current_stage', 'unknown')})"
         )
-        parts.append(f"- blockers: {len(state.get('blockers', []))}")
-        next_actions = state.get("next_actions", [])[:3]
+        if active.get("user_visible_status"):
+            parts.append(f"- status: {active['user_visible_status']}")
+        next_actions = list(active.get("next_actions", []))[:2]
         if next_actions:
-            parts.append("- next actions: " + " | ".join(next_actions))
-    if handoff_path.exists():
-        handoff = yaml.safe_load(handoff_path.read_text(encoding="utf-8")) or {}
-        if handoff.get("objective_completed"):
-            parts.append(f"- last objective: {handoff['objective_completed']}")
+            parts.append("- next: " + " | ".join(str(x) for x in next_actions))
+        open_questions = list(active.get("open_questions", []))[:2]
+        if open_questions:
+            parts.append("- unresolved: " + " | ".join(str(x) for x in open_questions))
+    else:
+        parts.append("- active run: none")
+        parts.append("- next actions: start substantive research from the user's ordinary-language request")
+
     print("\n".join(parts))
 
 

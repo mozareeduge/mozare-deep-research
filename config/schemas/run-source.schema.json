@@ -1,0 +1,169 @@
+{
+  "$defs": {
+    "AccessStatus": {
+      "enum": [
+        "unknown",
+        "accessible",
+        "abstract_only",
+        "preview_only",
+        "paywalled",
+        "unavailable"
+      ],
+      "title": "AccessStatus",
+      "type": "string"
+    },
+    "ReadStatus": {
+      "enum": [
+        "unread",
+        "metadata",
+        "abstract",
+        "bounded-section",
+        "close-read"
+      ],
+      "title": "ReadStatus",
+      "type": "string"
+    },
+    "SourceRole": {
+      "enum": [
+        "primary-core",
+        "primary-adjacent",
+        "scholarly-interpretation",
+        "critique",
+        "reception",
+        "context",
+        "discovery-only"
+      ],
+      "title": "SourceRole",
+      "type": "string"
+    },
+    "SourceStatus": {
+      "enum": [
+        "candidate",
+        "selected",
+        "rejected",
+        "unavailable"
+      ],
+      "title": "SourceStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://mros.local/schemas/run-source.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "access_status": {
+      "$ref": "#/$defs/AccessStatus",
+      "default": "unknown"
+    },
+    "citation": {
+      "default": "",
+      "title": "Citation",
+      "type": "string"
+    },
+    "creators": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Creators",
+      "type": "array"
+    },
+    "identifier": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Identifier"
+    },
+    "lane": {
+      "title": "Lane",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "notes": {
+      "default": "",
+      "title": "Notes",
+      "type": "string"
+    },
+    "read_status": {
+      "$ref": "#/$defs/ReadStatus",
+      "default": "unread"
+    },
+    "role": {
+      "$ref": "#/$defs/SourceRole",
+      "default": "context"
+    },
+    "selected_for": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Selected For",
+      "type": "array"
+    },
+    "selection_reason": {
+      "default": "",
+      "title": "Selection Reason",
+      "type": "string"
+    },
+    "source_id": {
+      "pattern": "^[a-z][a-z0-9_.:-]{1,127}$",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "source_type": {
+      "title": "Source Type",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/SourceStatus",
+      "default": "candidate"
+    },
+    "title": {
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "url": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Url"
+    },
+    "year": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Year"
+    }
+  },
+  "required": [
+    "source_id",
+    "title",
+    "source_type",
+    "lane"
+  ],
+  "title": "RunSource",
+  "type": "object"
+}

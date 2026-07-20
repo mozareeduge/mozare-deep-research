@@ -26,6 +26,16 @@ from mros.models import (  # noqa: E402
     SourceRecord,
 )
 
+from mros.runs import (  # noqa: E402
+    ResearchRunState,
+    RunAudit,
+    RunClaim,
+    RunEvidence,
+    RunQuery,
+    RunSource,
+    RunTerm,
+)
+
 MODELS = {
     "research-contract": ResearchContract,
     "research-question": ResearchQuestion,
@@ -40,6 +50,13 @@ MODELS = {
     "handoff-receipt": HandoffReceipt,
     "run-state": RunState,
     "audit-report": AuditReport,
+    "research-run-state": ResearchRunState,
+    "run-query": RunQuery,
+    "run-source": RunSource,
+    "run-term": RunTerm,
+    "run-evidence": RunEvidence,
+    "run-claim": RunClaim,
+    "run-audit": RunAudit,
 }
 
 

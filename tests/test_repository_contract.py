@@ -14,13 +14,14 @@ def test_claude_settings_are_valid_and_bounded():
     settings = json.loads((ROOT / ".claude/settings.json").read_text(encoding="utf-8"))
     assert settings["model"] == "sonnet"
     assert settings["effortLevel"] == "medium"
-    assert "Stop" in settings["hooks"]
-    assert all("rm -rf" not in allowed for allowed in settings["permissions"]["allow"])
-    stop_command = settings["hooks"]["Stop"][0]["hooks"][0]["command"]
-    assert stop_command == "mros-stop-gate"
-    hook_text = (ROOT / "scripts/hooks/stop_gate.py").read_text(encoding="utf-8")
-    assert '"--phase-stop"' not in hook_text
-
+    assert "Stop" not in settings.get("hooks", {})
+    allowed = set(settings["permissions"]["allow"])
+    denied = set(settings["permissions"]["deny"])
+    assert "Skill(research)" in allowed
+    assert "WebSearch" in allowed and "WebFetch" in allowed
+    assert "Skill(deep-research)" in denied
+    assert "mcp__zotero__zotero_get_item_fulltext" in denied
+    assert all("rm -rf" not in item for item in allowed)
 
 def test_all_skills_have_supported_core_frontmatter():
     allowed = {
@@ -33,9 +34,10 @@ def test_all_skills_have_supported_core_frontmatter():
         "context",
         "agent",
         "user-invocable",
+        "disallowed-tools",
     }
     skills = sorted((ROOT / ".claude/skills").glob("*/SKILL.md"))
-    assert len(skills) >= 10
+    assert [skill.parent.name for skill in skills] == ["research"]
     for skill in skills:
         text = skill.read_text(encoding="utf-8")
         assert text.startswith("---\n"), skill
@@ -98,6 +100,13 @@ def test_exported_schemas_are_complete_and_valid_json():
         "research-question",
         "run-state",
         "source-record",
+        "research-run-state",
+        "run-query",
+        "run-source",
+        "run-term",
+        "run-evidence",
+        "run-claim",
+        "run-audit",
     }
     schema_dir = ROOT / "config/schemas"
     found = {p.name.removesuffix(".schema.json") for p in schema_dir.glob("*.schema.json")}
@@ -112,7 +121,7 @@ def test_exported_schemas_are_complete_and_valid_json():
 def test_mcp_example_contains_no_literal_secrets():
     text = (ROOT / ".mcp.json.example").read_text(encoding="utf-8")
     assert "sk-" not in text
-    assert "${" in text
+    assert "ABSOLUTE_PATH_TO_ACADEMIC_TOOLS_MCP" in text
 
 
 def test_no_empty_claim_of_live_integration_certification():
@@ -142,12 +151,20 @@ def test_packaged_harness_mirror_matches_source():
             source_files = {
                 p.relative_to(source): p.read_bytes()
                 for p in source.rglob("*")
-                if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"
+                if p.is_file()
+                and "__pycache__" not in p.parts
+                and p.suffix != ".pyc"
+                and p.name not in {"settings.local.json", ".mcp.json"}
+                and "secrets" not in p.parts
             }
             target_files = {
                 p.relative_to(target): p.read_bytes()
                 for p in target.rglob("*")
-                if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"
+                if p.is_file()
+                and "__pycache__" not in p.parts
+                and p.suffix != ".pyc"
+                and p.name not in {"settings.local.json", ".mcp.json"}
+                and "secrets" not in p.parts
             }
             assert target_files == source_files
 
@@ -176,5 +193,23 @@ def test_mcp_example_pins_audited_distributions():
     data = json.loads((ROOT / ".mcp.json.example").read_text(encoding="utf-8"))
     academic = data["mcpServers"]["academic_tools"]
     zotero = data["mcpServers"]["zotero"]
-    assert academic["args"] == ["academic-tools-mcp==2026.6.4"]
+    assert academic["command"] == "uv"
+    assert academic["args"][-3:] == ["python", "-m", "academic_tools_mcp.server"]
+    assert "ABSOLUTE_PATH_TO_ACADEMIC_TOOLS_MCP" in academic["args"]
     assert zotero["args"] == ["--from", "zotero-mcp-server==0.6.2", "zotero-mcp"]
+
+
+def test_v1_active_prompt_assets_are_preserved_in_archive():
+    phase_archive = (ROOT / "docs/archive/v1-phase-skills.md").read_text(encoding="utf-8")
+    agent_archive = (ROOT / "docs/archive/v1-agents.md").read_text(encoding="utf-8")
+    for name in [
+        "00-frame", "10-intake", "20-question-map", "30-discover", "40-screen",
+        "50-acquire", "60-evidence", "70-challenge", "80-claims", "90-synthesis-plan",
+        "100-draft", "110-audit", "120-design-translation", "130-handoff",
+    ]:
+        assert f"## {name}" in phase_archive
+    for name in [
+        "citation-auditor", "contradiction-reviewer", "evidence-reviewer",
+        "final-adversary", "source-screener",
+    ]:
+        assert f"## {name}" in agent_archive

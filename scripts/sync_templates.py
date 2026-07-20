@@ -17,7 +17,11 @@ def files_under(path: Path) -> dict[Path, bytes]:
     return {
         item.relative_to(path): item.read_bytes()
         for item in path.rglob("*")
-        if item.is_file() and "__pycache__" not in item.parts and item.suffix not in {".pyc", ".pyo"}
+        if item.is_file()
+        and "__pycache__" not in item.parts
+        and item.suffix not in {".pyc", ".pyo"}
+        and item.name not in {"settings.local.json", ".mcp.json"}
+        and "secrets" not in item.parts
     }
 
 
@@ -48,7 +52,9 @@ def main() -> int:
             shutil.copytree(
                 source,
                 destination,
-                ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "*.pyo"),
+                ignore=shutil.ignore_patterns(
+                    "__pycache__", "*.pyc", "*.pyo", "settings.local.json", ".mcp.json", "secrets"
+                ),
             )
         else:
             shutil.copy2(source, destination)

@@ -1,0 +1,486 @@
+questions:
+  - question_id: uw.central
+    text: >-
+      What is "Uncreative Writing" as a historically and theoretically bounded concept, and
+      what central thesis should organize a literature-review dossier on it for later
+      theoretical, methodological, and creative-research work?
+    question_type: conceptual
+    status: open
+    critical: true
+    decision_ids:
+      - dossier-thesis
+      - dossier-structure
+    dependencies:
+      - uw.terminology
+      - uw.principal-authors
+      - uw.disputes
+      - uw.conceptual-writing
+      - uw.appropriation-copying
+      - uw.constraint-authorship
+      - uw.mediation-digital
+      - uw.archives-pedagogy
+      - uw.precursors
+      - uw.criticism-alternatives
+      - uw.boundaries
+    purpose_ids:
+      - uw-dossier
+    preferred_source_types:
+      - book
+      - chapter
+      - article
+    excluded_source_types:
+      - dataset
+      - generated
+    languages:
+      - en
+    evidence_requirement:
+      min_direct_evidence: 3
+      min_independent_groups: 2
+      counter_search_required: true
+      acceptable_source_kinds:
+        - book
+        - chapter
+        - article
+        - archive_record
+        - webpage
+      notes: >-
+        Central claim; requires human approval before promotion (central_claim_promotion
+        gate). Must synthesize, not merely aggregate, the prerequisite questions.
+    stop_rule: >-
+      Stop drafting the central thesis only after all prerequisite questions have reached
+      evidence_ready or contested status, and present unresolved tensions explicitly rather
+      than forcing synthesis.
+    time_range: null
+    notes: Root synthesis question; requires human approval before promotion to central claim.
+
+  - question_id: uw.terminology
+    text: >-
+      When and how did "Uncreative Writing" form as a named term and concept, and what is its
+      earliest documented use and canonical formulation?
+    question_type: genealogical
+    status: open
+    critical: true
+    decision_ids:
+      - dossier-thesis
+    dependencies: []
+    purpose_ids:
+      - uw-dossier
+    preferred_source_types:
+      - book
+      - chapter
+      - article
+      - archive_record
+    excluded_source_types:
+      - dataset
+      - generated
+    languages:
+      - en
+    evidence_requirement:
+      min_direct_evidence: 2
+      min_independent_groups: 2
+      counter_search_required: true
+      acceptable_source_kinds:
+        - book
+        - chapter
+        - article
+        - archive_record
+        - webpage
+      notes: Pin the term's first documented public use separately from its later canonization.
+    stop_rule: >-
+      Stop once the earliest documented use and the canonical published formulation are each
+      independently sourced, or marked unknown/not verified if they cannot be confirmed.
+    time_range: "2000-2011"
+    notes: ""
+
+  - question_id: uw.principal-authors
+    text: >-
+      Who are the principal authors associated with "Uncreative Writing" (e.g. Kenneth
+      Goldsmith and close collaborators/interlocutors), what are their core texts and
+      formulations, and where do they diverge from one another?
+    question_type: bibliographic
+    status: open
+    critical: true
+    decision_ids:
+      - dossier-structure
+    dependencies:
+      - uw.terminology
+    purpose_ids:
+      - uw-dossier
+    preferred_source_types:
+      - book
+      - chapter
+      - article
+    excluded_source_types:
+      - dataset
+      - generated
+    languages:
+      - en
+    evidence_requirement:
+      min_direct_evidence: 3
+      min_independent_groups: 2
+      counter_search_required: true
+      acceptable_source_kinds:
+        - book
+        - chapter
+        - article
+        - archive_record
+      notes: Distinguish the coiner/central figure from co-theorists and anthology editors.
+    stop_rule: >-
+      Stop once core texts and formulations are identified for each principal author with
+      direct-quote-level evidence, or marked not accessed if primary texts are unavailable.
+    time_range: null
+    notes: ""
+
+  - question_id: uw.disputes
+    text: >-
+      What are the major documented disputes, controversies, or public critiques directly
+      involving "Uncreative Writing" and its principal texts, authors, or public performances?
+    question_type: counterargument
+    status: open
+    critical: true
+    decision_ids:
+      - dossier-structure
+      - evidence-standard
+    dependencies:
+      - uw.principal-authors
+    purpose_ids:
+      - uw-dossier
+    preferred_source_types:
+      - article
+      - webpage
+      - archive_record
+    excluded_source_types:
+      - dataset
+      - generated
+    languages:
+      - en
+    evidence_requirement:
+      min_direct_evidence: 3
+      min_independent_groups: 3
+      counter_search_required: true
+      acceptable_source_kinds:
+        - article
+        - webpage
+        - archive_record
+        - book
+        - chapter
+      notes: >-
+        Include disputes over race, authorship, appropriation ethics, and institutional
+        reception; require multiple independent accounts before characterizing any dispute.
+    stop_rule: >-
+      Stop once each major dispute has at least one primary account and one independent
+      secondary account, with contested framings marked as contested, not resolved.
+    time_range: null
+    notes: ""
+
+  - question_id: uw.conceptual-writing
+    text: >-
+      How does "Uncreative Writing" relate to and differ from the broader "Conceptual
+      Writing" / "Conceptual Poetics" movement it emerged within?
+    question_type: comparative
+    status: open
+    critical: false
+    decision_ids:
+      - source-scope
+    dependencies:
+      - uw.principal-authors
+    purpose_ids:
+      - uw-dossier
+    preferred_source_types:
+      - book
+      - chapter
+      - article
+    excluded_source_types:
+      - dataset
+      - generated
+    languages:
+      - en
+    evidence_requirement:
+      min_direct_evidence: 2
+      min_independent_groups: 2
+      counter_search_required: true
+      acceptable_source_kinds:
+        - book
+        - chapter
+        - article
+      notes: ""
+    stop_rule: >-
+      Stop once the relationship (subset, synonym, or distinct-but-overlapping) is supported
+      by at least two independent scholarly characterizations.
+    time_range: null
+    notes: ""
+
+  - question_id: uw.appropriation-copying
+    text: >-
+      How do appropriation, copying, and plagiarism function as method and aesthetic within
+      Uncreative Writing, and what theoretical framings (e.g. originality, authorship) are
+      invoked to justify or critique them?
+    question_type: conceptual
+    status: open
+    critical: false
+    decision_ids:
+      - source-scope
+    dependencies:
+      - uw.principal-authors
+    purpose_ids:
+      - uw-dossier
+    preferred_source_types:
+      - book
+      - chapter
+      - article
+    excluded_source_types:
+      - dataset
+      - generated
+    languages:
+      - en
+    evidence_requirement:
+      min_direct_evidence: 2
+      min_independent_groups: 2
+      counter_search_required: true
+      acceptable_source_kinds:
+        - book
+        - chapter
+        - article
+      notes: ""
+    stop_rule: >-
+      Stop once the primary theoretical justification and at least one direct critique of it
+      are both sourced.
+    time_range: null
+    notes: ""
+
+  - question_id: uw.constraint-authorship
+    text: >-
+      How does Uncreative Writing engage constraint-based writing traditions and theories of
+      authorship (e.g. "death of the author", procedural writing)?
+    question_type: conceptual
+    status: open
+    critical: false
+    decision_ids:
+      - source-scope
+    dependencies:
+      - uw.principal-authors
+    purpose_ids:
+      - uw-dossier
+    preferred_source_types:
+      - book
+      - chapter
+      - article
+    excluded_source_types:
+      - dataset
+      - generated
+    languages:
+      - en
+    evidence_requirement:
+      min_direct_evidence: 2
+      min_independent_groups: 2
+      counter_search_required: true
+      acceptable_source_kinds:
+        - book
+        - chapter
+        - article
+      notes: ""
+    stop_rule: >-
+      Stop once the link to at least one named theory of authorship and one constraint-based
+      tradition is directly sourced, not inferred.
+    time_range: null
+    notes: ""
+
+  - question_id: uw.mediation-digital
+    text: >-
+      How do mediation, digital culture, and networked/internet textuality shape Uncreative
+      Writing's methods and claims?
+    question_type: mechanism
+    status: open
+    critical: false
+    decision_ids:
+      - source-scope
+    dependencies:
+      - uw.principal-authors
+    purpose_ids:
+      - uw-dossier
+    preferred_source_types:
+      - book
+      - chapter
+      - article
+      - webpage
+    excluded_source_types:
+      - dataset
+      - generated
+    languages:
+      - en
+    evidence_requirement:
+      min_direct_evidence: 2
+      min_independent_groups: 2
+      counter_search_required: true
+      acceptable_source_kinds:
+        - book
+        - chapter
+        - article
+        - webpage
+      notes: ""
+    stop_rule: >-
+      Stop once at least two independently sourced mechanisms linking digital mediation to
+      Uncreative Writing's method are documented.
+    time_range: null
+    notes: ""
+
+  - question_id: uw.archives-pedagogy
+    text: >-
+      How has Uncreative Writing been institutionalized through archives, pedagogy (e.g.
+      university courses), and artistic-research frameworks?
+    question_type: design_implication
+    status: open
+    critical: false
+    decision_ids:
+      - source-scope
+    dependencies:
+      - uw.principal-authors
+    purpose_ids:
+      - uw-dossier
+    preferred_source_types:
+      - webpage
+      - archive_record
+      - article
+    excluded_source_types:
+      - dataset
+      - generated
+    languages:
+      - en
+    evidence_requirement:
+      min_direct_evidence: 2
+      min_independent_groups: 1
+      counter_search_required: false
+      acceptable_source_kinds:
+        - webpage
+        - archive_record
+        - article
+        - book
+      notes: Institutional/pedagogical record; lower independent-group bar than contested claims.
+    stop_rule: >-
+      Stop once at least one institutional record (course, archive, or program) is directly
+      sourced with access route recorded.
+    time_range: null
+    notes: ""
+
+  - question_id: uw.precursors
+    text: >-
+      What precursor movements and adjacent traditions (e.g. Dada, Fluxus, found poetry,
+      appropriation art, Oulipo, flarf, information/procedural poetics) prefigure or run
+      parallel to Uncreative Writing?
+    question_type: genealogical
+    status: open
+    critical: true
+    decision_ids:
+      - source-scope
+    dependencies:
+      - uw.terminology
+    purpose_ids:
+      - uw-dossier
+    preferred_source_types:
+      - book
+      - chapter
+      - article
+    excluded_source_types:
+      - dataset
+      - generated
+    languages:
+      - en
+    evidence_requirement:
+      min_direct_evidence: 3
+      min_independent_groups: 2
+      counter_search_required: true
+      acceptable_source_kinds:
+        - book
+        - chapter
+        - article
+        - archive_record
+      notes: Require an explicit scholarly link, not mere topical resemblance, for each precursor.
+    stop_rule: >-
+      Stop once each claimed precursor has an explicit scholarly link to Uncreative Writing or
+      its immediate discourse, or is marked as an unsupported resemblance.
+    time_range: "1910-2000"
+    notes: ""
+
+  - question_id: uw.criticism-alternatives
+    text: >-
+      What are the major criticisms, limitations, and alternative theoretical frameworks
+      proposed after or against Uncreative Writing, and how has the discourse developed since
+      roughly 2015?
+    question_type: counterargument
+    status: open
+    critical: true
+    decision_ids:
+      - evidence-standard
+      - dossier-structure
+    dependencies:
+      - uw.disputes
+      - uw.conceptual-writing
+    purpose_ids:
+      - uw-dossier
+    preferred_source_types:
+      - book
+      - chapter
+      - article
+    excluded_source_types:
+      - dataset
+      - generated
+    languages:
+      - en
+    evidence_requirement:
+      min_direct_evidence: 3
+      min_independent_groups: 2
+      counter_search_required: true
+      acceptable_source_kinds:
+        - book
+        - chapter
+        - article
+        - webpage
+      notes: Actively search for the strongest available counter-framework, not just restatements.
+    stop_rule: >-
+      Stop once at least two independent post-2015 critical or alternative-framework sources
+      are directly sourced and characterized without flattening their differences.
+    time_range: "2011-present"
+    notes: ""
+
+  - question_id: uw.boundaries
+    text: >-
+      Where is the boundary between practices explicitly named "Uncreative Writing" and
+      similar practices that use other terms (e.g. conceptual writing, appropriation art,
+      flarf, information poetry, digital poetics)?
+    question_type: comparative
+    status: open
+    critical: true
+    decision_ids:
+      - source-scope
+      - dossier-structure
+    dependencies:
+      - uw.conceptual-writing
+      - uw.precursors
+      - uw.appropriation-copying
+    purpose_ids:
+      - uw-dossier
+    preferred_source_types:
+      - book
+      - chapter
+      - article
+    excluded_source_types:
+      - dataset
+      - generated
+    languages:
+      - en
+    evidence_requirement:
+      min_direct_evidence: 2
+      min_independent_groups: 2
+      counter_search_required: true
+      acceptable_source_kinds:
+        - book
+        - chapter
+        - article
+      notes: >-
+        This question directly gates dossier scope; ambiguous boundary cases must be recorded
+        as contested rather than assigned by default.
+    stop_rule: >-
+      Stop once a working boundary rule is stated and at least two borderline cases have been
+      tested against it and recorded as inside, outside, or contested.
+    time_range: null
+    notes: Requires human approval before the boundary rule is used to include/exclude sources at scale.

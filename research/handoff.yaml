@@ -1,35 +1,58 @@
-objective_completed: Finalized the offline-verifiable MROS repository architecture and implementation.
+objective_completed: Revised and offline-certified MROS v1.2 as a natural-language
+  concept-dossier research controller.
 state_files_changed:
-  - research/contract.yaml
-  - research/state.yaml
-  - research/handoff.yaml
-  - docs/
-  - config/schemas/
-  - src/mros/
-  - tests/
-  - .claude/
+- README.md
+- CLAUDE.md
+- .claude/
+- src/mros/
+- config/schemas/
+- tests/
+- docs/
+- releases/mros-v1.2.0.md
+- TEST_REPORT.md
+- research/state.yaml
+- research/handoff.yaml
+- events/events.jsonl
 sources_added: []
 evidence_added: []
 claims_changed: []
 decisions:
-  - Methodology is compiled into operations rather than injected as a master prompt.
-  - Zotero is read-only by default and remains the canonical human library.
-  - PaperQA is retrieval-only by default.
-  - Sonnet medium is the session baseline with phase-level effort overrides.
-  - The automatic stop hook validates repository state; phase handoff remains explicit.
+- A rough user inquiry is the only required interface; internal phases are not user
+  commands.
+- Route depth and output profile are inferred separately.
+- Concept dossiers store exact queries, source roles, reference-specific terms, verified
+  evidence, scoped claims, visualization, and audit.
+- Evidence and term records precede outline and drafting.
+- The controller uses broad web and scholarly lanes, optional bounded Zotero, one
+  scout, and one fresh verifier.
+- Completion is profile-sensitive and live superiority remains benchmark-gated.
 unresolved:
-  - Live integration certification requires the user's local environment and credentials.
-failed_routes: []
+- Automatic skill selection, source availability, live scholarly quality, elapsed
+  time, and Claude subscription usage require local certification.
+- The active GitHub repository has not yet been migrated to v1.2.
+failed_routes:
+- V1.0 manual numbered phases required surgical prompts and did not act as a research
+  product.
+- V1.1 semantic front door lacked first-class query and exact-term state for the target
+  concept-dossier inquiry.
 next_actions:
-  - Run docs/live-certification.md after installation.
-  - Build a project-specific model-routing gold set.
+- Apply docs/apply-v1.2-with-claude.md to the active repository in a draft PR.
+- Submit the original one-sentence Uncreative Writing inquiry without a slash command.
+- Run docs/live-certification.md and docs/benchmark-protocol.md.
 do_not_repeat:
-  - Do not enable Zotero writes in the normal research profile.
-  - Do not use PaperQA answer generation as accepted research evidence.
-  - Do not paste the complete methodology dossier into routine Claude sessions.
+- Do not require the user to invoke numbered research phases.
+- Do not read framework schemas or run repository tests during ordinary research.
+- Do not treat snippets, abstracts, model memory, or generated summaries as exact-source
+  evidence.
+- Do not enable whole-document or mutating Zotero operations in the normal route.
+- Do not claim superiority before live comparative evidence.
 verification:
-  - 83 offline tests passed.
-  - Total statement coverage was 76%.
-  - Full, phase-stop, release, wheel-install, hook, and extracted-archive verification passed.
-  - Exact evidence is recorded in TEST_REPORT.md.
-created_at: 2026-07-17T22:00:00Z
+- 94 automated tests passed with 75% statement/branch coverage.
+- 20 JSON Schemas are current.
+- Compilation, validation, repository verification, phase-stop, release audit, and
+  event-chain checks passed.
+- Wheel build and clean-environment wheel installation passed.
+- Wheel-installed Claude harness and concept-dossier run initialization/summary/validation
+  passed.
+- Final archive verification is recorded in TEST_REPORT.md after packaging.
+created_at: '2026-07-19T09:52:00Z'

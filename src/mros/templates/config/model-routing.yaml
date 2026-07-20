@@ -1,18 +1,16 @@
 default:
   model: sonnet
   effort: medium
-phases:
-  frame: {model: sonnet, effort: medium}
-  intake: {model: sonnet, effort: low}
-  query-planning: {model: sonnet, effort: low}
-  source-screening: {model: haiku, effort: low, escalate_to: "sonnet/low"}
-  evidence-extraction: {model: sonnet, effort: low}
-  evidence-qualification: {model: sonnet, effort: medium}
-  counter-reading: {model: sonnet, effort: medium}
-  claim-construction: {model: sonnet, effort: medium}
-  outline: {model: sonnet, effort: medium}
-  drafting: {model: sonnet, effort: medium}
-  citation-audit: {model: sonnet, effort: medium}
-  central-adversarial-review: {model: sonnet, effort: high}
-  exceptional-architecture-decision: {model: opus, effort: high, human_approval: true}
-forbidden_defaults: [max, ultracode, fable]
+routes:
+  lookup: {model: sonnet, effort: low, max_subagents: 0}
+  close-read: {model: sonnet, effort: medium, max_subagents: 0}
+  brief: {model: sonnet, effort: medium, max_subagents: 1}
+  deep: {model: sonnet, effort: medium, max_subagents: 2, sequential_only: true}
+  design: {model: sonnet, effort: medium, max_subagents: 2, sequential_only: true}
+workers:
+  research-scout: {model: haiku, effort: low, max_turns: 8}
+  research-verifier: {model: sonnet, effort: medium, max_turns: 10}
+forbidden_defaults: [max, ultracode, fable, agent-teams]
+notes:
+  - Use the current model alias available in the client; do not require a numbered Sonnet release.
+  - Escalate effort only for a bounded consequential judgment, not for broad search.

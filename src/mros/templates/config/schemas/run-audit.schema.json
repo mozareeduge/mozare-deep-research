@@ -1,0 +1,59 @@
+{
+  "$defs": {
+    "AuditStatus": {
+      "enum": [
+        "pending",
+        "pass",
+        "pass_with_limits",
+        "fail"
+      ],
+      "title": "AuditStatus",
+      "type": "string"
+    }
+  },
+  "$id": "https://mros.local/schemas/run-audit.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "checks": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Checks",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "reviewed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reviewed At"
+    },
+    "status": {
+      "$ref": "#/$defs/AuditStatus",
+      "default": "pending"
+    }
+  },
+  "title": "RunAudit",
+  "type": "object"
+}

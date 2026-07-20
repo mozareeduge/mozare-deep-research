@@ -1,55 +1,55 @@
-# Live integration certification
+# Live integration and semantic research certification
 
-Run this checklist in the actual research environment after installing the optional systems. Record the results in `audits/live-certification-YYYY-MM-DD.md` and append one event to `events/events.jsonl`.
+Record results under `audits/live-certification-YYYY-MM-DD.md`.
 
-## Preconditions
+## Test 1 — source tools
 
-- Pin the exact versions or commit SHAs of Claude Code, Academic Tools MCP, Zotero MCP, and PaperQA.
-- Review the current upstream release notes and permissions.
-- Start from a temporary Zotero collection containing three known, non-sensitive sources.
-- Keep Zotero write tools disabled.
-- Do not place API keys in committed files.
+1. Confirm Academic Tools resolves one known scholarly identifier.
+2. Confirm built-in web search and fetch inspect one official source page.
+3. Confirm Zotero can find one known source and read a bounded page range.
+4. Confirm Zotero whole-document and write operations are unavailable.
 
-## Academic Tools MCP
+## Test 2 — automatic semantic routing
 
-1. Run `claude mcp list` and confirm the server is connected.
-2. Search one known DOI or arXiv identifier.
-3. Record provider, exact query, result count, and normalized identifiers.
-4. Traverse one reference and one citation page with a bounded result limit.
-5. Confirm that snippets are stored as discovery records, not evidence cards.
+Start a fresh Local Code session and submit an ordinary-language source question. Do not type a slash command. Pass when the project `research` skill is selected and no generic deep-research skill runs.
 
-## Zotero MCP
+## Test 3 — exact wording
 
-1. Search the same known source by title and item key.
-2. Read its metadata and child attachment list.
-3. Run semantic search for a phrase known to appear in the document.
-4. Read a bounded two-page range around the hit.
-5. Confirm that complete-paper and write tools are unavailable to the normal workflow.
-6. Export one bibliography entry and compare it with the Zotero record.
+Request two uninterrupted passages from a known source. Pass when Claude reopens bounded source locations, records accurate wording and location, separates quotation from interpretation, and does not rely on conversation memory.
 
-## PaperQA retrieval-only adapter
+## Test 4 — full concept dossier
 
-1. Install with `python -m pip install -e '.[paperqa]'` in an isolated environment.
-2. Build a manifest for three accepted local documents.
-3. Build a `Docs` index using explicit citation metadata.
-4. Retrieve five chunks for a known query through the MROS adapter.
-5. Confirm that no answer-agent or per-passage summarization call occurred.
-6. Compare top passages with Zotero/local lexical retrieval.
-7. Validate at least one exact quotation and its page or section.
+In a fresh session submit only:
 
-## Claude workflow
+> Gather up a research note dossier around the concept “uncreative writing” with exact terms and wording and concepts introduced and used by references.
 
-1. Run `/00-frame` on a bounded test question.
-2. Complete discovery, screening, evidence, challenge, claims, outline, draft, and audit.
-3. Confirm that a generated lead cannot become formal evidence without human review.
-4. Confirm that the stop hook permits ordinary turns but blocks invalid repository state.
-5. Run `/130-handoff`, then `python -m mros verify . --phase-stop`.
+Pass when Claude:
 
-## Pass criteria
+- automatically infers `deep` + `concept-dossier`;
+- creates an isolated run and begins discovery in the same turn;
+- does not read framework schemas or require internal commands;
+- records exact searches in `queries.jsonl`;
+- uses web and academic lanes and respects any Zotero instruction;
+- selects sources by role and reads bounded primary materials;
+- creates source notes, verified term records, evidence, and claims;
+- runs a challenge search and a low-gain stop check;
+- produces a clear dossier and useful visualization;
+- uses a fresh verifier;
+- passes `mros run-validate`;
+- completes without the user operating phases.
 
-- No destructive Zotero action is possible from the normal profile.
-- Every accepted evidence card resolves to an existing, validated span.
-- Every formal claim resolves to accepted evidence allowed for formal use.
-- No model-generated statement appears as source evidence.
-- Query, source, evidence, claim, event, and handoff records validate.
-- All deviations from the pinned contracts are documented.
+## Test 5 — resumption
+
+Interrupt an active run after at least one meaningful batch. Start a fresh session and say only “continue the research.” Pass when the newest active run, stage, status, and next action are recovered without repeating the initial search.
+
+## Blocking failures
+
+- generic research skill selected;
+- user required to invoke internal commands;
+- exact wording taken from memory, snippets, or generated summaries;
+- excluded source lane used;
+- no query or term record in a completed web/academic concept dossier;
+- unsupported or unverified central claim;
+- destructive or whole-document Zotero operation;
+- silent stall without a saved blocker or progress state;
+- uncontrolled parallel agents.

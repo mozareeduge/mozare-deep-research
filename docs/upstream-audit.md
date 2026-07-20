@@ -1,120 +1,72 @@
 # Upstream systems: extraction and composition audit
 
-MROS does not combine whole upstream applications. It selects mechanisms according to the research operation, removes duplicated orchestration, and keeps one authoritative project state.
+MROS does not stack whole research applications. It extracts mechanisms, assigns one owner to each type of state, and avoids duplicate planners, answer generators, and model bills.
 
 ## Recursive Research
 
-**Retained**
+**Retained:** disk checkpoints, visible gaps, contradiction search, bounded cycles, resume, explicit stopping.
 
-- disk checkpoints that survive clean Claude sessions;
-- explicit resume and handoff behavior;
-- visible gaps and contradiction tasks;
-- bounded research cycles and an explicit stop decision;
-- separation of collection from final synthesis.
+**Transformed:** threads become coverage slots and source roles; source tiers become directness/access/role/independence; saturation becomes consequential evidence gain; cycles are internal rather than user-operated.
 
-**Transformed**
-
-- generic threads became a typed question-and-decision dependency graph;
-- fixed source tiers became source/access records plus evidence directness, role, independence, and allowed use;
-- finding counts became central-claim coverage, counter-search completion, and marginal unique-evidence gain;
-- narrative checkpoints became validated state files and compact handoff receipts.
-
-**Rejected from the default method**
-
-- “PhD-level” labels;
-- arbitrary minimum numbers of sources or cross-thread links;
-- model-generated weighted matrices presented as measurement;
-- compulsory speculative connections.
+**Rejected:** “PhD-level” labels, weighted pseudo-measurement, fixed source minima, compulsory relations, and a twenty-cycle default.
 
 ## Academic Tools MCP
 
-**Retained as an external deterministic service**
+**Retained as external deterministic scholarly I/O:** provider routing, identifiers, metadata, citation/reference traversal, bounded text, caching, retries, and output limits.
 
-- provider routing and identifier normalization;
-- compact metadata and abstract triage;
-- references and citation traversal;
-- batched requests, caching, retry behavior, and concurrency control;
-- bounded PDF acquisition, conversion locks, section indexes, in-paper search, and BM25;
-- explicit output limits.
+**MROS additions:** exact query ledger, source-role records, access/read status, and the rule that provider output is discovery until the source itself is consulted.
 
-**MROS additions**
+## ScholarQA
 
-- immutable query records;
-- canonical source records and cross-provider deduplication;
-- source/access status and allowed-use controls;
-- a rule that provider snippets remain discovery leads until source consultation.
+**Retained as pipeline logic:** retrieval union, reranking before generation, exact quote extraction, evidence assignment before drafting, typed intermediate objects, independent stages, and trace events.
 
-## Ai2 ScholarQA
+**Transformed:** every passage keeps its own provenance; quotations can be rejected or deferred; no evidence-free sections; no mandatory use of every quote; no citation-count quality proxy; exact terms receive their own ledger.
 
-**Retained as pipeline ideas**
-
-- lexical/full-text retrieval union;
-- local reranking before generation;
-- exact-evidence extraction;
-- outline planning and assignment of evidence before drafting;
-- typed intermediate objects and event traces;
-- section-level revision actions.
-
-**Transformed**
-
-- expensive per-paper LLM extraction became bounded passage packets and one scoped evidence-qualification operation;
-- forced quote placement became accept, reject, defer, or re-route decisions;
-- serial full-report accumulation became section briefs plus compact continuity records;
-- citation-count importance became optional contextual metadata;
-- indirect references enter a verification queue instead of being laundered into evidence.
-
-**Rejected**
-
-- evidence-free sections written from model memory;
-- mandatory use of every extracted quotation;
-- a monolithic application runtime as the source of project truth.
-
-## Zotero MCP
-
-**Retained as the canonical human library**
-
-- item, collection, tag, attachment, annotation, note, and citation-key navigation;
-- semantic passage search and optional local reranking;
-- bounded PDF-page consultation;
-- bibliography export, coverage diagnostics, and related-paper discovery.
-
-**Restricted**
-
-- full-paper responses are denied during routine research;
-- all write, merge, delete, relation, collection, tag, note, and annotation mutations are denied by default;
-- semantic hits are candidates, not evidence;
-- user notes remain distinct from source quotations.
+**Rejected:** monolithic runtime as project truth, expensive per-paper model calls, abstract fallback presented as equivalent evidence, and report sections generated from model memory.
 
 ## PaperQA
 
-**Retained as an optional local corpus service**
+**Retained as optional local corpus service:** document readers, page-aware chunks, reusable indexes, sparse/semantic/hybrid retrieval, MMR, local embeddings, and manual/no-agent access.
 
-- readers and page-aware parsing;
-- reusable document indexes;
-- sparse, semantic, and hybrid retrieval;
-- metadata-aware chunks and local embeddings;
-- a manual/no-agent `Docs` path.
+**Restricted:** no answer-agent authority, no hidden per-passage LLM summaries, no automatic multimodal enrichment, and no acceptance of generated answers as evidence.
 
-**Transformed**
+## Zotero MCP
 
-- the adapter supplies citation metadata from MROS/Zotero manifests;
-- `Docs.retrieve_texts` is called directly;
-- per-passage LLM summaries, answer generation, and media enrichment are disabled by default;
-- retrieved chunks must pass MROS source-location and quotation validation.
+**Retained as canonical human library:** items, collections, attachments, annotations, semantic search, bounded PDF pages, bibliography export, and related-source discovery.
 
-**Rejected from the default path**
+**Restricted:** full-document retrieval and all write/mutation families are denied; semantic hits are candidates; user notes remain distinct from source wording.
 
-- `pqa ask` as the research controller;
-- separately billed model calls hidden inside indexing or evidence summarization;
-- accepting a generated answer as research evidence.
+## GPT Researcher
+
+**Retained as design ideas:** planner/executor/publisher separation, mixed web/local/MCP source routing, and durable report artifacts.
+
+**Not installed:** its default model/search services can require separate API billing and would duplicate the MROS controller. MROS instead keeps one subscription-bound Claude controller and uses built-in web plus free scholarly tools.
+
+## STORM and Co-STORM
+
+**Retained as design ideas:** perspective discovery before outline and interactive refinement of a field map.
+
+**Transformed:** perspective mapping becomes coverage slots and source roles. Generated encyclopedic reports are not treated as evidence or a final dossier.
+
+## OpenScholar and scientific research agents
+
+**Retained as evaluation evidence:** retrieval-grounded synthesis and citation-focused benchmarks show the value of separating evidence retrieval from answer writing.
+
+**Restricted:** scientific-corpus results are not assumed to transfer to books, archives, artistic research, multilingual humanities work, or conceptual history.
+
+## Local Deep Research
+
+**Retained as future deployment option:** local-first privacy, reusable indexes, and self-hosted source control.
+
+**Not an initial dependency:** installation, models, indexing, and maintenance would increase operational burden before the research method is live-certified.
 
 ## Composition rule
 
-Only one layer owns each kind of state:
+One layer owns each state:
 
-- **Zotero:** bibliographic library, attachments, human annotations.
-- **External retrieval tools:** discovery and bounded source access.
-- **PaperQA/local indexes:** candidate passage retrieval.
-- **MROS/Git:** questions, query history, evidence status, claims, decisions, audits, events, and releases.
-- **Claude Code:** bounded interpretation and composition over validated state.
-- **Human:** purpose, consequential promotion decisions, destructive actions, and release authority.
+- **Zotero:** library, attachments, human annotations;
+- **web and scholarly tools:** discovery and bounded access;
+- **PaperQA/local indexes:** optional candidate retrieval;
+- **MROS/Git:** exact queries, sources, source notes, terms, evidence, claims, progress, audits, decisions, and releases;
+- **Claude:** semantic routing, reading, comparison, challenge, and synthesis;
+- **human:** purpose, consequential ambiguity, source/legal access, ethical judgment, and publication authority.

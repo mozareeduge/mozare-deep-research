@@ -1,51 +1,51 @@
 # Architecture
 
-## Four planes
+## Product boundary
 
-### Governance
+MROS has one natural-language controller and one deterministic integrity layer.
 
-Defines the research purpose, target decision, audience, genre, scope, exclusions, evidence requirements, budget, and human approval gates.
-
-### Discovery and corpus
-
-Routes searches to scholarly providers, Zotero, official web sources, archives, repositories, or local materials. It normalizes identifiers, preserves versions, records queries, screens candidates, and snapshots the accepted corpus.
-
-### Evidence and argument
-
-Retrieves bounded passages, reranks locally where useful, verifies exact text and location, qualifies evidence independently, seeks challenges, and builds atomic claims.
-
-### Audit and translation
-
-Checks citations and claim support, controls release wording, records omissions, and translates accepted research into user, design, technical, and evaluation decisions.
+The controller interprets a rough inquiry, chooses the route and output profile, selects source lanes, and carries research through to delivery. The integrity layer stores and validates searches, sources, exact terms, evidence, claims, state, and audit.
 
 ## Flow
 
 ```mermaid
 flowchart TD
-    A[Research contract] --> B[Question and decision graph]
-    B --> C[Bounded search plan]
-    C --> D[Academic Tools / Zotero / official web / local material]
-    D --> E[Normalize, deduplicate, preserve lineage]
-    E --> F[Screen and snapshot accepted corpus]
-    F --> G[Zotero pages / local parsers / optional PaperQA retrieval]
-    G --> H[Local ranking and passage packets]
-    H --> I[Exact text and location validation]
-    I --> J[Independent evidence qualification]
-    J --> K[Challenge search and alternative explanations]
-    K --> L[Atomic claim graph]
-    L --> M{Critical coverage and marginal gain}
-    M -->|gap| C
-    M -->|sufficient or explicitly unresolved| N[Approved outline]
-    N --> O[Evidence-bounded drafting]
-    O --> P[Fresh citation and adversarial audit]
-    P -->|repair| L
-    P -->|new evidence| C
-    P -->|pass| Q[Release and decision records]
+    A[Rough inquiry] --> B[Route + output-profile inference]
+    B -->|lookup| C[Direct bounded answer]
+    B -->|substantive| D[Create isolated run]
+    D --> E[Compact work order]
+    E --> F[Distinct web / academic / Zotero / local searches]
+    F --> G[Role-based source selection]
+    G --> H[Bounded reading + source notes]
+    H --> I[Verified terms and evidence]
+    I --> J[Challenge and gap-directed iteration]
+    J --> K[Scoped claims]
+    K --> L[Evidence-led dossier and visualization]
+    L --> M[Fresh verifier]
+    M -->|repair| H
+    M -->|pass / pass with limits| N[Validate and deliver]
 ```
 
-## State boundaries
+## Semantic routes and output profiles
 
-- Zotero owns bibliographic identity, attachments, human annotations, collections, and bibliography exports.
-- Git owns questions, search history, evidence status, claims, generated text, decisions, audits, and event history.
-- Claude sessions are disposable workers over bounded state.
-- Scripts own exactness, referential integrity, hashing, and accounting.
+Routes control depth: lookup, close-read, brief, deep, and design. Output profiles control composition: source answer, research note, concept dossier, literature review, comparison, or design brief.
+
+This separation matters. “Deep” alone does not tell the machine whether the user wants a chronology, a terminology dossier, a comparative matrix, or a design decision.
+
+## Durable run boundary
+
+Every substantive inquiry lives under `research/runs/<run-id>/`. The framework source and legacy root records are not modified during ordinary research.
+
+V1.2 adds first-class query and term records. The run therefore preserves not only the final claims but how sources were found and which exact reference-specific formulations entered the dossier.
+
+## Source and reading architecture
+
+Search is broad but reading is selective. Sources are assigned roles rather than universal tiers. Access advances through metadata, abstract/description, bounded section/pages, and close reading. A source's role, access, reading status, and limitations are recorded independently.
+
+## Distributed agency
+
+The main Sonnet researcher owns route selection, source judgment, synthesis, and state. One bounded low-effort scout may map a search batch. One fresh Sonnet verifier may audit consequential outputs. Workers run sequentially; the system does not use a swarm.
+
+## Validation boundary
+
+Scripts validate record shape, duplicate IDs, query/source links, source/evidence/term/claim references, exact-term verification requirements, completion state, and audit status. They do not assert that an interpretation is intellectually correct. Live source checking and human evaluation remain necessary.
