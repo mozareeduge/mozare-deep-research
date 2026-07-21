@@ -1,8 +1,8 @@
 # close-read
 
-Purpose: Reconstruct how a bounded source or source set works.
+Purpose: Reconstruct exact wording or operation from one or a few named sources.
 
 Required outputs:
-- source analysis records
+- verified passages
+- interpretation
 - limits
-- next research actions

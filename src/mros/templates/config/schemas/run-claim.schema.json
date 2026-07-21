@@ -1,0 +1,96 @@
+{
+  "$defs": {
+    "ClaimStatus": {
+      "enum": [
+        "proposed",
+        "supported",
+        "contested",
+        "qualified",
+        "insufficient",
+        "unresolved",
+        "withdrawn"
+      ],
+      "title": "ClaimStatus",
+      "type": "string"
+    },
+    "ClaimType": {
+      "enum": [
+        "historical",
+        "definitional",
+        "interpretive",
+        "comparative",
+        "reception",
+        "critical",
+        "methodological",
+        "design"
+      ],
+      "title": "ClaimType",
+      "type": "string"
+    }
+  },
+  "$id": "https://mros.local/schemas/run-claim.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "claim_id": {
+      "pattern": "^[a-z][a-z0-9_.:-]{1,127}$",
+      "title": "Claim Id",
+      "type": "string"
+    },
+    "claim_type": {
+      "$ref": "#/$defs/ClaimType",
+      "default": "interpretive"
+    },
+    "counterevidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Counterevidence Ids",
+      "type": "array"
+    },
+    "evidence_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "notes": {
+      "default": "",
+      "title": "Notes",
+      "type": "string"
+    },
+    "scope": {
+      "default": "",
+      "title": "Scope",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/ClaimStatus",
+      "default": "proposed"
+    },
+    "term_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Term Ids",
+      "type": "array"
+    },
+    "text": {
+      "minLength": 1,
+      "title": "Text",
+      "type": "string"
+    },
+    "uncertainty": {
+      "default": "",
+      "title": "Uncertainty",
+      "type": "string"
+    }
+  },
+  "required": [
+    "claim_id",
+    "text"
+  ],
+  "title": "RunClaim",
+  "type": "object"
+}

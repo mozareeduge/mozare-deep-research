@@ -12,7 +12,7 @@ def test_method_compiles_kernel_and_profiles(project: Path):
     )
     out = compile_method(project)
     assert out.exists()
-    assert (project / ".mros/compiled/run-profiles/evidence.md").exists()
+    assert (project / ".mros/compiled/run-profiles/deep.md").exists()
     assert "formal claim" in out.read_text(encoding="utf-8")
 
 

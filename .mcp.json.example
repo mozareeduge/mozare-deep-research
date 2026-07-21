@@ -8,13 +8,18 @@
         "zotero-mcp"
       ],
       "env": {
-        "ZOTERO_LOCAL": "${ZOTERO_LOCAL:-true}"
+        "ZOTERO_LOCAL": "true"
       }
     },
     "academic_tools": {
-      "command": "uvx",
+      "command": "uv",
       "args": [
-        "academic-tools-mcp==2026.6.4"
+        "run",
+        "--directory",
+        "ABSOLUTE_PATH_TO_ACADEMIC_TOOLS_MCP",
+        "python",
+        "-m",
+        "academic_tools_mcp.server"
       ]
     }
   }

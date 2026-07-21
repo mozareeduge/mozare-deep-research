@@ -10,11 +10,12 @@ from pydantic import ValidationError
 from .audit import audit_project
 from .coverage import compute_question_coverage
 from .events import append_event, verify_event_chain
-from .io import dump_data, load_model_list, read_jsonl
+from .io import dump_data, load_data, load_model_list, read_jsonl
 from .method import check_operational_language, compile_method
-from .models import EvidenceCard, EventRecord, HandoffReceipt, QueryRecord, ResearchQuestion, ClaimRecord
+from .models import EvidenceCard, EventRecord, HandoffReceipt, QueryRecord, ResearchQuestion, ClaimRecord, RunState
 from .project import copy_claude_harness, init_project
 from .quotes import verify_quote_file
+from .runs import OutputProfile, ResearchMode, RunStage, append_run_record, init_run, summarize_run, update_run_state, validate_run
 from .verify import verify_project
 
 
@@ -69,6 +70,15 @@ def cmd_event_append(args: argparse.Namespace) -> int:
         decision_note=args.note or "",
     )
     result = append_event(path, event)
+    state_path = _root(args.path) / "research" / "state.yaml"
+    if state_path.exists():
+        state = RunState.model_validate(load_data(state_path))
+        updated = RunState.model_validate({
+            **state.model_dump(mode="python"),
+            "last_event_hash": result.event_hash,
+            "updated_at": result.timestamp,
+        })
+        dump_data(state_path, updated)
     print(result.model_dump_json(indent=2))
     return 0
 
@@ -121,6 +131,66 @@ def cmd_handoff(args: argparse.Namespace) -> int:
 
 
 
+
+def cmd_run_init(args: argparse.Namespace) -> int:
+    state = init_run(
+        _root(args.path),
+        mode=ResearchMode(args.mode),
+        title=args.title,
+        source_lanes=args.source_lane or [],
+        excluded_lanes=args.exclude_lane or [],
+        output_profile=OutputProfile(args.output_profile),
+        route_reason=args.route_reason or "",
+        requirements=args.requirement or [],
+        force=args.force,
+    )
+    print(state.model_dump_json(indent=2))
+    return 0
+
+
+def cmd_run_append(args: argparse.Namespace) -> int:
+    if args.json_file:
+        raw = _root(args.json_file).read_text(encoding="utf-8")
+    elif args.json:
+        raw = args.json
+    else:
+        raw = sys.stdin.read()
+    if not raw.strip():
+        raise ValueError("provide --json-file, --json, or JSON on stdin")
+    record = json.loads(raw)
+    result = append_run_record(_root(args.path), args.kind, record)
+    print(result.model_dump_json(indent=2))
+    return 0
+
+
+def cmd_run_state(args: argparse.Namespace) -> int:
+    changes: dict[str, object] = {}
+    if args.status is not None:
+        changes["status"] = args.status
+    if args.stage is not None:
+        changes["current_stage"] = args.stage
+    if args.next is not None:
+        changes["next_actions"] = args.next
+    if args.open_question is not None:
+        changes["open_questions"] = args.open_question
+    if args.user_visible_status is not None:
+        changes["user_visible_status"] = args.user_visible_status
+    state = update_run_state(_root(args.path), **changes)
+    print(state.model_dump_json(indent=2))
+    return 0
+
+
+def cmd_run_validate(args: argparse.Namespace) -> int:
+    result = validate_run(_root(args.path))
+    print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
+    return 0 if result["ok"] else 1
+
+
+def cmd_run_summary(args: argparse.Namespace) -> int:
+    result = summarize_run(_root(args.path))
+    print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
+    return 0 if result["ok"] else 1
+
 def cmd_verify(args: argparse.Namespace) -> int:
     result = verify_project(_root(args.path), phase_stop=args.phase_stop)
     print(json.dumps(result, indent=2))
@@ -159,6 +229,11 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("handoff"); p.add_argument("path", nargs="?", default="."); p.add_argument("--objective", required=True); p.add_argument("--changed", action="append"); p.add_argument("--unresolved", action="append"); p.add_argument("--next", action="append"); p.add_argument("--verification", action="append"); p.set_defaults(func=cmd_handoff)
     p = sub.add_parser("verify"); p.add_argument("path", nargs="?", default="."); p.add_argument("--phase-stop", action="store_true"); p.set_defaults(func=cmd_verify)
     p = sub.add_parser("doctor"); p.add_argument("path", nargs="?", default="."); p.set_defaults(func=cmd_doctor)
+    p = sub.add_parser("run-init"); p.add_argument("path"); p.add_argument("--mode", choices=[x.value for x in ResearchMode], required=True); p.add_argument("--title"); p.add_argument("--source-lane", action="append"); p.add_argument("--exclude-lane", action="append"); p.add_argument("--output-profile", choices=[x.value for x in OutputProfile], default=OutputProfile.RESEARCH_NOTE.value); p.add_argument("--route-reason"); p.add_argument("--requirement", action="append"); p.add_argument("--force", action="store_true"); p.set_defaults(func=cmd_run_init)
+    p = sub.add_parser("run-append"); p.add_argument("path"); p.add_argument("--kind", choices=["query", "source", "term", "evidence", "claim"], required=True); group = p.add_mutually_exclusive_group(); group.add_argument("--json-file"); group.add_argument("--json"); p.set_defaults(func=cmd_run_append)
+    p = sub.add_parser("run-state"); p.add_argument("path"); p.add_argument("--status", choices=["active", "needs_input", "blocked", "complete"]); p.add_argument("--stage", choices=[x.value for x in RunStage]); p.add_argument("--next", action="append"); p.add_argument("--open-question", action="append"); p.add_argument("--user-visible-status"); p.set_defaults(func=cmd_run_state)
+    p = sub.add_parser("run-validate"); p.add_argument("path"); p.set_defaults(func=cmd_run_validate)
+    p = sub.add_parser("run-summary"); p.add_argument("path"); p.set_defaults(func=cmd_run_summary)
     return parser
 
 

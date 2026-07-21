@@ -24,3 +24,5 @@ sources/inbox/**
 *.zip
 *.sha256
 *.whl
+.claude/worktrees/
+research/runs/**/.tmp/

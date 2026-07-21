@@ -1,26 +1,26 @@
 # Claude model and effort routing
 
-**As-of date:** 2026-07-17.
+**Policy:** use capability aliases and observed quality, not a hard-coded marketing model number.
 
-The project uses the `sonnet` alias and medium effort at session start. On the direct Anthropic route, the alias currently resolves to Sonnet 5. Skills and subagents set their own effort for the active turn or worker.
+The project starts with the current `sonnet` alias at medium effort. The exact numbered model available in Claude Desktop, Claude Code web, a cloud provider, or a future release may differ. MROS must therefore remain functional on the current Sonnet offered by the client and benchmark phase-specific alternatives rather than assuming “Sonnet 5” or any other release is present.
 
 ## Routing matrix
 
 | Work | Model | Effort | Reason |
 |---|---|---|---|
-| Intake and query variants | Sonnet | low | bounded extraction and formatting |
-| Straightforward metadata screen | Haiku | low | low-risk batch classification |
-| Ambiguous screen | Sonnet | low | escalation for nuance |
-| Evidence qualification | Sonnet | medium | local interpretation matters |
-| Challenge reading and claims | Sonnet | medium | requires scoped reasoning |
-| Outline and section drafting | Sonnet | medium | preserves quality without default high effort |
-| Final central audit | Sonnet | high | one bounded independent gate |
-| Exceptional architecture conflict | Opus | high | only with human approval and a compact packet |
+| Narrow lookup | Sonnet | low | small, source-specific task |
+| Broad source scouting | Haiku | low | bounded candidate mapping in an isolated context |
+| Close reading and evidence qualification | Sonnet | medium | source context and interpretive precision matter |
+| Claim construction and synthesis | Sonnet | medium | consequential reasoning without default overthinking |
+| Fresh citation and scope verification | Sonnet | medium | independent integrity check |
+| Exceptional unresolved judgment | current strongest available model | high | only after a compact evidence packet and only when materially useful |
 
 ## Rules
 
-- Do not use high effort for search, file conversion, deduplication, quotation matching, or ledger updates.
-- Do not use `max` or `ultracode` as a project default.
-- Do not hand an expensive model the complete corpus.
-- Benchmark Haiku, Sonnet low/medium/high, and optional older models on real project tasks before changing routing.
-- A model improvement does not remove the need for bounded context and deterministic verification.
+- Model effort is a routing decision, not a proxy for research quality.
+- Do not use high effort for search, metadata handling, conversion, deduplication, quotation matching, or ledger updates.
+- Do not use `max`, `ultracode`, long-running agent teams, or an uncontrolled worker swarm as defaults.
+- Do not hand an expensive model the complete corpus when bounded source packets suffice.
+- Escalate only after a defined quality failure, not pre-emptively.
+- Benchmark the available Haiku and Sonnet configurations on real source screening, evidence qualification, quotation, synthesis, and audit tasks.
+- Record client model, effort, elapsed time, corrections, and usage observations in benchmark reports.

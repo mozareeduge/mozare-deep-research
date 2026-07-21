@@ -4,44 +4,40 @@
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate
+# Windows: .venv\Scripts\activate
+# macOS/Linux: source .venv/bin/activate
 python -m pip install -e .
 python -m pytest
 python -m mros verify .
 ```
 
-## 2. Update and inspect Claude Code
+## 2. Open the repository in Claude Code
 
-```bash
-claude update
-claude --version
-claude doctor
-```
-
-The repository expects current support for skill `model` and `effort`, custom subagent `maxTurns`, project hooks, and Sonnet 5.
+Use a current Claude Code or Claude Desktop Code version that supports project skills, custom subagents, project hooks, and built-in `WebSearch`/`WebFetch`. The repository uses the current `sonnet` alias rather than requiring a specific numbered Sonnet release.
 
 ## 3. Configure MCP servers locally
 
-Review `.mcp.json.example`, then copy it:
+Review `.mcp.json.example`, copy it to `.mcp.json`, and keep that file uncommitted.
 
-```bash
-cp .mcp.json.example .mcp.json
-claude mcp list
+For Academic Tools, clone the pinned upstream tag and run `uv sync`, then replace `ABSOLUTE_PATH_TO_ACADEMIC_TOOLS_MCP` with the real local path. The upstream-supported command is:
+
+```text
+uv run --directory <path> python -m academic_tools_mcp.server
 ```
 
-Package commands can differ by upstream release. Confirm the installation command in each upstream README. Keep tokens and keys in environment variables or local settings.
+For Zotero, keep `ZOTERO_LOCAL=true`, start Zotero 7+, and enable the local API. Do not add a Zotero API key for local use.
 
-## 4. Prepare Zotero
+## 4. Verify the integrations
 
-- Start Zotero.
-- Enable local access required by the selected Zotero MCP mode.
-- Test search, metadata and one bounded page read.
-- Do not enable write tools during initial setup.
+Confirm that Claude can:
 
-## 5. Start the first run
+- run one bounded academic identifier lookup;
+- search one known Zotero item;
+- inspect metadata and child attachments;
+- read a bounded page range;
+- use built-in web search and fetch;
+- not call Zotero whole-document or write tools.
 
-```bash
-claude
-```
+## 5. Start research
 
-Then invoke `/00-frame`. Complete and approve the contract before discovery.
+Ask the real question in ordinary language. Do not invoke a numbered phase or generic `/deep-research` skill. Claude should automatically use the project `research` skill and create a durable run when needed.

@@ -18,7 +18,7 @@ def render_kernel(config: dict) -> str:
     lines = [KERNEL_HEADER.rstrip(), ""]
     for index, invariant in enumerate(config.get("invariants", []), 1):
         lines.append(f"{index}. {invariant['operational_rule']}")
-    lines.extend(["", "This kernel is intentionally compact. Load detailed procedures through phase skills.", ""])
+    lines.extend(["", "This kernel is intentionally compact. Load detailed procedures through the semantic research skill only when needed.", ""])
     return "\n".join(lines)
 
 
@@ -31,6 +31,9 @@ def compile_method(root: Path) -> Path:
     kernel_path.write_text(kernel, encoding="utf-8")
     profiles = config.get("run_profiles", {})
     profile_dir = out_dir / "run-profiles"
+    if profile_dir.exists():
+        for stale in profile_dir.glob("*.md"):
+            stale.unlink()
     profile_dir.mkdir(parents=True, exist_ok=True)
     for name, profile in profiles.items():
         text = f"# {name}\n\nPurpose: {profile['purpose']}\n\nRequired outputs:\n"

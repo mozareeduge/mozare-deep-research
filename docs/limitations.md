@@ -1,13 +1,13 @@
 # Known limitations
 
-- Live Academic Tools MCP, Zotero MCP, Claude Code, and PaperQA operations were not executed in the packaged environment because they require the user's network, library, installation, permissions, or subscription. The adapters and policies are offline-tested against explicit contracts; live compatibility must still be certified locally.
-- The PaperQA adapter targets the current PaperQA 5-style `Docs.aadd` and `Docs.retrieve_texts` interfaces. It fails closed on contract drift, but an upstream release can still require adaptation.
-- MROS does not provide a complete PDF-layout engine. It validates normalized text produced by Zotero, PaperQA, or another parser; page, figure, table, note, and offset quality therefore depend on the upstream extraction.
-- Exact quotation matching proves textual presence in the recorded normalized file. It does not by itself prove that the passage entails a claim, that the edition is authoritative, or that a translation is adequate.
-- Local semantic ranking quality depends on the embedding and reranking models, corpus language, extraction quality, and chunking policy.
-- Scholarly-provider coverage is uneven for books, chapters, archives, artistic works, minor literatures, new publications, and non-English sources.
-- Citation counts, related-paper services, and support/contrast metadata are discovery signals, not universal quality scores.
-- Hash-chained events are tamper-evident within the repository, not cryptographically signed or externally notarized.
-- Claude aliases, effort semantics, subscription limits, MCP schemas, and upstream package behavior may change. Pin and retest before upgrades.
-- Human evaluation remains necessary for conceptual specificity, cultural and historical context, ethical use, source fitness, design consequence, and final claim permission.
-- MROS can enforce the distinctions and transformations it controls; it cannot make weak, inaccessible, or misinterpreted sources strong.
+- Automatic skill selection is model-mediated. Project instructions and the proactive skill description reduce misrouting, but live certification in the installed Claude client is still required.
+- The machine can infer a route and output profile from a rough inquiry, but a consequential ambiguity, inaccessible central source, privacy issue, or exhausted subscription can still require one user decision or a later continuation.
+- Live web, Academic Tools, Zotero, and Claude operations were not executed by offline tests. Their contracts and permission policies are tested; actual availability and source quality require local evaluation.
+- MROS cannot guarantee access to every publisher page, book, archive, paywalled source, or edition. It records preview-only, paywalled, unavailable, indirect, and version-limited states.
+- A verified exact quotation establishes textual presence in the accessed representation. It does not by itself prove first coinage, historical influence, interpretive entailment, edition authority, or translation adequacy.
+- Source-role coverage is a research aid, not a fixed quota. Some objects require fewer deeper primary sources; others require wider current coverage.
+- Scholarly-provider coverage is uneven for books, chapters, archives, artistic works, minor literatures, and non-English sources. Web, publisher, archive, and direct-file lanes remain necessary.
+- The optional PaperQA adapter is not in the normal route. It may help large accepted local corpora but adds dependency and indexing complexity.
+- Offline tests simulate the end-to-end record flow with synthetic material. They do not prove that the live model will find the best sources or write the best interpretation.
+- Model aliases, effort behavior, subscription limits, MCP schemas, and upstream packages change. Pin integrations and rerun certification after upgrades.
+- Human evaluation remains necessary for historical specificity, cultural and ethical judgment, conceptual precision, source fitness, and publication decisions.

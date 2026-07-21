@@ -3,8 +3,12 @@
   "effortLevel": "medium",
   "permissions": {
     "allow": [
+      "Skill(research)",
+      "WebSearch",
+      "WebFetch",
       "Bash(python -m mros *)",
-      "Bash(python -m pytest *)",
+      "Bash(.venv/Scripts/python.exe -m mros *)",
+      "Bash(.venv/bin/python -m mros *)",
       "Bash(git status)",
       "Bash(git diff *)",
       "mcp__academic_tools__*",
@@ -16,10 +20,18 @@
       "mcp__zotero__zotero_read_pdf_pages",
       "mcp__zotero__zotero_get_collection_items",
       "mcp__zotero__zotero_find_related_papers",
-      "mcp__zotero__zotero_export_bibliography",
-      "mcp__zotero__zotero_library_coverage"
+      "mcp__zotero__zotero_export_bibliography"
     ],
     "deny": [
+      "Skill(deep-research)",
+      "Skill(deep-research *)",
+      "mcp__zotero__zotero_get_item_fulltext",
+      "mcp__zotero__zotero_create_*",
+      "mcp__zotero__zotero_update_*",
+      "mcp__zotero__zotero_delete_*",
+      "mcp__zotero__zotero_add_*",
+      "mcp__zotero__zotero_remove_*",
+      "mcp__zotero__zotero_merge_duplicates",
       "Read(./.env)",
       "Read(./.env.*)",
       "Read(./secrets/**)",
@@ -33,18 +45,7 @@
           {
             "type": "command",
             "command": "mros-session-context",
-            "timeout": 15
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "mros-stop-gate",
-            "timeout": 60
+            "timeout": 10
           }
         ]
       }

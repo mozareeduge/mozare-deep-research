@@ -1,0 +1,113 @@
+{
+  "$defs": {
+    "EvidenceRole": {
+      "enum": [
+        "support",
+        "refute",
+        "qualify",
+        "define",
+        "contextualize",
+        "example"
+      ],
+      "title": "EvidenceRole",
+      "type": "string"
+    },
+    "VerificationMethod": {
+      "enum": [
+        "not-verified",
+        "bounded-source-recheck",
+        "exact-match-script",
+        "indirect-reference",
+        "metadata-only"
+      ],
+      "title": "VerificationMethod",
+      "type": "string"
+    }
+  },
+  "$id": "https://mros.local/schemas/run-evidence.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "context_after": {
+      "default": "",
+      "title": "Context After",
+      "type": "string"
+    },
+    "context_before": {
+      "default": "",
+      "title": "Context Before",
+      "type": "string"
+    },
+    "evidence_id": {
+      "pattern": "^[a-z][a-z0-9_.:-]{1,127}$",
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "exact_quote": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Exact Quote"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "location": {
+      "default": "",
+      "title": "Location",
+      "type": "string"
+    },
+    "paraphrase": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Paraphrase"
+    },
+    "proposition": {
+      "minLength": 1,
+      "title": "Proposition",
+      "type": "string"
+    },
+    "role": {
+      "$ref": "#/$defs/EvidenceRole",
+      "default": "support"
+    },
+    "source_id": {
+      "pattern": "^[a-z][a-z0-9_.:-]{1,127}$",
+      "title": "Source Id",
+      "type": "string"
+    },
+    "verification_method": {
+      "$ref": "#/$defs/VerificationMethod",
+      "default": "not-verified"
+    },
+    "verified": {
+      "default": false,
+      "title": "Verified",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "evidence_id",
+    "source_id",
+    "proposition"
+  ],
+  "title": "RunEvidence",
+  "type": "object"
+}

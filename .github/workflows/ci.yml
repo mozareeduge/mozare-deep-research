@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12", "3.13"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -36,3 +36,7 @@ jobs:
           /tmp/mros-wheel-venv/bin/mros init /tmp/mros-wheel-project --project-id wheel-project --title "Wheel Project" --with-claude
           /tmp/mros-wheel-venv/bin/mros doctor /tmp/mros-wheel-project
           /tmp/mros-wheel-venv/bin/mros validate /tmp/mros-wheel-project
+          mkdir -p /tmp/mros-wheel-project/research/runs/ci-smoke
+          printf 'Research a bounded topic.\n' > /tmp/mros-wheel-project/research/runs/ci-smoke/request.md
+          /tmp/mros-wheel-venv/bin/mros run-init /tmp/mros-wheel-project/research/runs/ci-smoke --mode brief --source-lane web
+          /tmp/mros-wheel-venv/bin/mros run-validate /tmp/mros-wheel-project/research/runs/ci-smoke

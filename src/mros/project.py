@@ -7,7 +7,7 @@ from .io import dump_data
 
 
 PROJECT_DIRS = [
-    "research", "sources/manifests", "sources/inbox", "corpus/originals", "corpus/index",
+    "research", "research/runs", "sources/manifests", "sources/inbox", "corpus/originals", "corpus/index",
     "queries", "evidence/spans", "evidence/cards", "relations", "claims", "decisions",
     "events", "audits", "releases", "residue", ".mros",
 ]
@@ -25,9 +25,9 @@ def init_project(root: Path, project_id: str, title: str, force: bool = False) -
         raise FileExistsError(f"MROS project already exists at {root}")
     for relative in PROJECT_DIRS:
         (root / relative).mkdir(parents=True, exist_ok=True)
-    for directory in ["sources/inbox", "corpus/originals", "corpus/index", "audits", "releases", "residue"]:
+    for directory in ["research/runs", "sources/inbox", "corpus/originals", "corpus/index", "audits", "releases", "residue"]:
         (root / directory / ".gitkeep").touch()
-    dump_data(marker, {"project_id": project_id, "title": title, "schema_version": "1.0"})
+    dump_data(marker, {"project_id": project_id, "title": title, "schema_version": "1.2"})
     dump_data(root / "research" / "contract.yaml", {
         "project_id": project_id,
         "title": title,
